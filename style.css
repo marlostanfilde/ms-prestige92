@@ -334,3 +334,22 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   border-top: 1px solid var(--border);
   padding-top: 20px;
 }
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:20px;
+  margin-top:30px;
+}
+
+.product-card{
+  background:#111;
+  border:1px solid #1e1e1e;
+  padding:20px;
+  color:white;
+  text-align:center;
+}
+
+.product-card h3{
+  color:#C9A84C;
+  margin-bottom:10px;
+}
