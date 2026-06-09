@@ -42,20 +42,22 @@ function addToCart(name, price) {
 })();
 
 // ── MODAL FICHE PRODUIT ──
+let _modalCurrent = {};
+
 function openModal(mono, icon, name, material, price, origPrice, badge, brand) {
   const overlay = document.getElementById('modalOverlay');
   const sheet   = document.getElementById('modalSheet');
   if (!overlay || !sheet) return;
 
-  // Calcul économies
+  _modalCurrent = { mono, icon, name, material, price, origPrice, badge, brand };
+
   const savings = Math.round((1 - parseInt(price) / parseInt(origPrice)) * 100);
 
-  // Remplissage
-  document.getElementById('mMono').textContent   = mono;
-  document.getElementById('mIcon').textContent   = icon;
-  document.getElementById('mName').textContent   = name;
-  document.getElementById('mMat').textContent    = material;
-  document.getElementById('mBrand').textContent  = brand || mono;
+  document.getElementById('mMono').textContent    = mono;
+  document.getElementById('mIcon').textContent    = icon;
+  document.getElementById('mName').textContent    = name;
+  document.getElementById('mMat').textContent     = material;
+  document.getElementById('mBrand').textContent   = brand || mono;
   document.getElementById('mPriceNow').textContent = price + ' €';
   document.getElementById('mPriceWas').textContent = origPrice + ' €';
   document.getElementById('mSavings').textContent  = '✦ Économisez ' + savings + '% par rapport au prix boutique';
@@ -64,11 +66,19 @@ function openModal(mono, icon, name, material, price, origPrice, badge, brand) {
   if (badge) { badgeEl.textContent = badge; badgeEl.style.display = 'inline-block'; }
   else { badgeEl.style.display = 'none'; }
 
-  // Bouton panier dans le modal
   document.getElementById('mBtnCart').onclick = function() {
     addToCart(name, price);
     closeModal();
   };
+
+  // Cœur — état wishlist
+  const favBtn = document.getElementById('mBtnFav');
+  if (favBtn) {
+    const wl = JSON.parse(localStorage.getItem('msWishlist') || '[]');
+    const inWl = wl.some(i => i.name === name);
+    favBtn.textContent = inWl ? '❤️' : '♡';
+    favBtn.title = inWl ? 'Retirer des coups de cœur' : 'Ajouter aux coups de cœur';
+  }
 
   overlay.classList.add('open');
   sheet.classList.add('open');
@@ -82,6 +92,25 @@ function closeModal() {
   overlay.classList.remove('open');
   sheet.classList.remove('open');
   document.body.style.overflow = '';
+}
+
+// ── WISHLIST (Coups de Cœur) ──
+function toggleWishlistModal() {
+  const { name, price, material, mono, icon, badge, brand, origPrice } = _modalCurrent;
+  if (!name) return;
+  let wl = JSON.parse(localStorage.getItem('msWishlist') || '[]');
+  const idx = wl.findIndex(i => i.name === name);
+  const favBtn = document.getElementById('mBtnFav');
+  if (idx >= 0) {
+    wl.splice(idx, 1);
+    if (favBtn) { favBtn.textContent = '♡'; favBtn.title = 'Ajouter aux coups de cœur'; }
+  } else {
+    wl.push({ name, price, material, mono, icon, badge, brand, origPrice });
+    if (favBtn) { favBtn.textContent = '❤️'; favBtn.title = 'Retirer des coups de cœur'; }
+    const toast = document.getElementById('toast');
+    if (toast) { toast.textContent = 'Ajouté aux coups de cœur'; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 2200); }
+  }
+  localStorage.setItem('msWishlist', JSON.stringify(wl));
 }
 
 // ── LOGO 3D CANVAS (page d'accueil uniquement) ──
