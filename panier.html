@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Mon Panier — MS Prestige 92</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <style>
+    .panier-page { background: #fff; min-height: calc(100vh - 97px); padding: 0 0 80px; }
+
+    /* ── PANIER VIDE ── */
+    .panier-empty { text-align: center; padding: 80px 24px; }
+    .panier-empty-icon { font-size: 52px; margin-bottom: 16px; }
+    .panier-empty-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; color: #111; margin-bottom: 8px; }
+    .panier-empty-sub { font-size: 12px; color: #aaa; letter-spacing: .08em; margin-bottom: 28px; }
+    .btn-shop { display: inline-block; background: #111; color: #fff; padding: 14px 36px; font-size: 11px; letter-spacing: .28em; text-transform: uppercase; font-family: 'Montserrat', sans-serif; }
+
+    /* ── ARTICLES ── */
+    .panier-wrap { padding: 0 16px; }
+    .panier-sect-label { font-size: 9px; letter-spacing: .35em; color: #aaa; text-transform: uppercase; padding: 28px 0 14px; border-bottom: 1px solid var(--border); margin-bottom: 0; }
+
+    .cart-item { display: flex; align-items: center; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--border); }
+    .cart-item-icon { width: 54px; height: 54px; background: #f0efeb; display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; }
+    .cart-item-info { flex: 1; }
+    .cart-item-name { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 300; color: #111; margin-bottom: 2px; }
+    .cart-item-price { font-size: 13px; color: var(--gold); }
+    .cart-item-controls { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .qty-btn { width: 28px; height: 28px; border: 1px solid var(--border); background: #fff; color: #666; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; -webkit-tap-highlight-color: transparent; }
+    .qty-btn:active { background: #f0efeb; }
+    .qty-val { font-size: 13px; color: #111; min-width: 20px; text-align: center; }
+    .cart-item-total { font-size: 14px; color: #111; font-weight: 400; min-width: 52px; text-align: right; flex-shrink: 0; }
+    .cart-item-del { color: #ccc; font-size: 18px; cursor: pointer; padding: 4px; -webkit-tap-highlight-color: transparent; flex-shrink: 0; }
+
+    /* ── RÉCAP ── */
+    .recap-block { background: #fafaf7; border: 1px solid var(--border); padding: 20px; margin: 20px 0; }
+    .recap-line { display: flex; justify-content: space-between; font-size: 12px; color: #666; margin-bottom: 10px; letter-spacing: .04em; }
+    .recap-line.total { border-top: 1px solid var(--border); padding-top: 12px; margin-top: 4px; font-size: 15px; color: #111; font-weight: 500; }
+    .recap-line.total span:last-child { color: var(--gold); }
+
+    /* ── FORMULAIRE ── */
+    .form-section { margin-top: 8px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+    .form-label { font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: #aaa; }
+    .form-input {
+      padding: 13px 14px; border: 1px solid var(--border); background: #fafaf7;
+      font-family: 'Montserrat', sans-serif; font-size: 13px; color: #111; outline: none;
+      transition: border-color .2s; width: 100%;
+    }
+    .form-input:focus { border-color: var(--gold); }
+    .form-input::placeholder { color: #ccc; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    /* ── PAIEMENT ── */
+    .pay-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    .pay-option {
+      display: flex; align-items: center; gap: 14px;
+      border: 1px solid var(--border); padding: 16px;
+      cursor: pointer; transition: border-color .2s;
+    }
+    .pay-option.selected { border-color: var(--gold); background: #fffdf7; }
+    .pay-radio {
+      width: 18px; height: 18px; border-radius: 50%;
+      border: 2px solid #ddd; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: border-color .2s;
+    }
+    .pay-option.selected .pay-radio { border-color: var(--gold); }
+    .pay-radio-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--gold); display: none;
+    }
+    .pay-option.selected .pay-radio-dot { display: block; }
+    .pay-icon { font-size: 22px; flex-shrink: 0; }
+    .pay-info { flex: 1; }
+    .pay-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 300; color: #111; margin-bottom: 2px; }
+    .pay-desc { font-size: 10px; color: #aaa; letter-spacing: .06em; }
+
+    /* Détails paiement */
+    .pay-detail { display: none; border: 1px solid var(--border); padding: 18px; margin-bottom: 20px; background: #fafaf7; }
+    .pay-detail.show { display: block; }
+    .pay-detail-title { font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .pay-detail-line { display: flex; justify-content: space-between; font-size: 12px; color: #333; padding: 6px 0; border-bottom: 1px solid var(--border); }
+    .pay-detail-line:last-child { border-bottom: none; }
+    .pay-detail-line span:first-child { color: #aaa; }
+    .pay-detail-especes { font-size: 12px; color: #555; line-height: 1.7; letter-spacing: .04em; }
+
+    /* ── BOUTON COMMANDER ── */
+    .btn-commander {
+      width: 100%; padding: 16px; background: #111; color: #fff; border: none;
+      font-family: 'Montserrat', sans-serif; font-size: 12px; letter-spacing: .28em;
+      text-transform: uppercase; cursor: pointer; transition: background .2s;
+    }
+    .btn-commander:active { background: var(--gold); }
+    .btn-commander:disabled { background: #ccc; cursor: not-allowed; }
+
+    /* ── CONFIRMATION ── */
+    .confirmation { display: none; text-align: center; padding: 60px 24px; }
+    .confirmation.show { display: block; }
+    .conf-icon { font-size: 52px; margin-bottom: 20px; }
+    .conf-title { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 300; color: #111; margin-bottom: 10px; letter-spacing: .04em; }
+    .conf-sub { font-size: 12px; color: #666; line-height: 1.8; letter-spacing: .04em; margin-bottom: 8px; }
+    .conf-ref { font-size: 11px; color: var(--gold); letter-spacing: .15em; margin-bottom: 28px; }
+    .conf-virement { background: #fafaf7; border: 1px solid var(--border); padding: 18px; margin: 20px 0 28px; text-align: left; }
+    .conf-virement-title { font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .conf-virement-line { display: flex; justify-content: space-between; font-size: 12px; color: #333; padding: 6px 0; border-bottom: 1px solid var(--border); }
+    .conf-virement-line:last-child { border-bottom: none; }
+    .conf-virement-line span:first-child { color: #aaa; }
+
+    /* Toast */
+    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--gold); color: #fff; padding: 12px 24px; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; white-space: nowrap; z-index: 999; transition: transform .3s cubic-bezier(.4,0,.2,1); pointer-events: none; }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+
+<div class="ann">Livraison offerte à partir de 150€.</div>
+
+<header class="header">
+  <button class="icon-btn" id="menuToggle" aria-label="Menu">
+    <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+  </button>
+  <a href="index.html" class="logo-block">
+    <div class="logo-main">MS Prestige 92</div>
+    <div class="logo-sub">Maison de Luxe</div>
+  </a>
+  <div class="header-right">
+    <a href="panier.html" class="icon-btn cart-btn" aria-label="Panier">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span class="cart-count" id="cartCount">0</span>
+    </a>
+  </div>
+</header>
+
+<div class="menu-overlay" id="menuOverlay"></div>
+<nav class="drawer" id="mobileMenu">
+  <div class="drawer-head">
+    <div class="drawer-logo">MS Prestige 92</div>
+    <button class="icon-btn" id="menuClose">✕</button>
+  </div>
+  <div class="drawer-section-label">Collections</div>
+  <div class="drawer-links">
+    <a href="louis-vuitton.html" class="drawer-link"><span class="dl-dot"></span>Louis Vuitton<span class="dl-arrow">→</span></a>
+    <a href="dior.html" class="drawer-link"><span class="dl-dot"></span>Dior<span class="dl-arrow">→</span></a>
+    <a href="hermes.html" class="drawer-link"><span class="dl-dot"></span>Hermès<span class="dl-arrow">→</span></a>
+    <a href="chaussures.html" class="drawer-link"><span class="dl-dot"></span>Chaussures de Luxe<span class="dl-arrow">→</span></a>
+    <a href="claquettes.html" class="drawer-link"><span class="dl-dot"></span>Claquettes de Luxe<span class="dl-arrow">→</span></a>
+  </div>
+  <div class="drawer-footer">
+    <a href="compte.html" class="drawer-account">👤 Mon compte</a>
+    <a href="panier.html" class="drawer-account">🛍 Mon panier</a>
+  </div>
+</nav>
+
+<div class="brand-bar">
+  <span class="brand-eyebrow">Récapitulatif</span>
+  <div class="brand-title">Mon Panier</div>
+  <div class="brand-sub">Articles · Livraison · Paiement</div>
+</div>
+
+<div class="panier-page">
+
+  <!-- PANIER VIDE -->
+  <div class="panier-empty" id="panierEmpty" style="display:none;">
+    <div class="panier-empty-icon">🛍</div>
+    <div class="panier-empty-title">Votre panier est vide</div>
+    <div class="panier-empty-sub">Découvrez nos collections et ajoutez vos pièces favorites</div>
+    <a href="louis-vuitton.html" class="btn-shop">Explorer les collections</a>
+  </div>
+
+  <!-- CONTENU PANIER -->
+  <div id="panierContenu">
+
+    <div class="panier-wrap">
+
+      <!-- Articles -->
+      <div class="panier-sect-label">Articles</div>
+      <div id="cartItems"></div>
+
+      <!-- Récap -->
+      <div class="recap-block" id="recapBlock">
+        <div class="recap-line"><span>Sous-total</span><span id="recapSousTotal">0 €</span></div>
+        <div class="recap-line"><span>Livraison</span><span id="recapLivraison">Gratuite</span></div>
+        <div class="recap-line total"><span>Total</span><span id="recapTotal">0 €</span></div>
+      </div>
+
+      <!-- Formulaire -->
+      <div class="panier-sect-label" style="margin-top:8px;">Vos informations</div>
+      <div class="form-section" style="margin-top:16px;">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Prénom</label>
+            <input class="form-input" type="text" id="fPrenom" placeholder="Jean" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nom</label>
+            <input class="form-input" type="text" id="fNom" placeholder="Dupont" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Adresse e-mail</label>
+          <input class="form-input" type="email" id="fEmail" placeholder="jean@email.com" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Adresse de livraison</label>
+          <input class="form-input" type="text" id="fAdresse" placeholder="12 rue de la Paix" required />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Code postal</label>
+            <input class="form-input" type="text" id="fCodePostal" placeholder="75001" maxlength="5" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Ville</label>
+            <input class="form-input" type="text" id="fVille" placeholder="Paris" required />
+          </div>
+        </div>
+      </div>
+
+      <!-- Paiement -->
+      <div class="panier-sect-label" style="margin-top:8px;">Moyen de paiement</div>
+      <div class="pay-options" style="margin-top:16px;">
+
+        <div class="pay-option" id="payVirement" onclick="selectPay('virement')">
+          <div class="pay-radio"><div class="pay-radio-dot"></div></div>
+          <div class="pay-icon">🏦</div>
+          <div class="pay-info">
+            <div class="pay-title">Virement Instantané</div>
+            <div class="pay-desc">Réception sous 10 secondes — RIB fourni après commande</div>
+          </div>
+        </div>
+
+        <div class="pay-option" id="payEspeces" onclick="selectPay('especes')">
+          <div class="pay-radio"><div class="pay-radio-dot"></div></div>
+          <div class="pay-icon">💵</div>
+          <div class="pay-info">
+            <div class="pay-title">Espèces</div>
+            <div class="pay-desc">À la livraison ou en retrait boutique</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Détail virement -->
+      <div class="pay-detail" id="detailVirement">
+        <div class="pay-detail-title">Coordonnées bancaires</div>
+        <div class="pay-detail-line"><span>Bénéficiaire</span><span>MS Prestige 92</span></div>
+        <div class="pay-detail-line"><span>IBAN</span><span id="ibanDisplay">À renseigner</span></div>
+        <div class="pay-detail-line"><span>BIC</span><span id="bicDisplay">À renseigner</span></div>
+        <div class="pay-detail-line"><span>Référence</span><span>Votre nom + commande</span></div>
+      </div>
+
+      <!-- Détail espèces -->
+      <div class="pay-detail" id="detailEspeces">
+        <div class="pay-detail-title">Règlement en espèces</div>
+        <div class="pay-detail-especes">
+          Le paiement s'effectue en espèces à la réception de votre commande ou lors d'un retrait en boutique. Nous vous contacterons pour convenir d'un rendez-vous après validation de votre commande.
+        </div>
+      </div>
+
+      <button class="btn-commander" id="btnCommander" onclick="passerCommande()" disabled>
+        Valider ma commande
+      </button>
+
+    </div>
+  </div>
+
+  <!-- CONFIRMATION -->
+  <div class="confirmation" id="confirmation">
+    <div class="conf-icon">✦</div>
+    <div class="conf-title">Commande confirmée</div>
+    <div class="conf-sub">Merci <strong id="confPrenom"></strong>, votre commande a bien été reçue.<br>Nous vous contacterons très prochainement.</div>
+    <div class="conf-ref" id="confRef"></div>
+
+    <div class="conf-virement" id="confVirementBlock" style="display:none;">
+      <div class="conf-virement-title">Effectuez votre virement</div>
+      <div class="conf-virement-line"><span>Bénéficiaire</span><span>MS Prestige 92</span></div>
+      <div class="conf-virement-line"><span>IBAN</span><span id="confIban">À renseigner</span></div>
+      <div class="conf-virement-line"><span>BIC</span><span id="confBic">À renseigner</span></div>
+      <div class="conf-virement-line"><span>Montant</span><span id="confMontant"></span></div>
+      <div class="conf-virement-line"><span>Référence</span><span id="confRefVirement"></span></div>
+    </div>
+
+    <a href="index.html" class="btn-shop">Retour à l'accueil</a>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div class="f-logo">MS Prestige 92</div>
+  <p class="f-tagline">Une sélection d'exception pour ceux qui ne font aucun compromis sur l'élégance.</p>
+  <div class="f-links">
+    <a href="louis-vuitton.html">Louis Vuitton</a>
+    <a href="dior.html">Dior</a>
+    <a href="hermes.html">Hermès</a>
+    <a href="chaussures.html">Chaussures</a>
+    <a href="claquettes.html">Claquettes</a>
+    <a href="#">Contact</a>
+    <a href="#">CGV</a>
+  </div>
+  <div class="f-copy">© 2026 MS Prestige 92 — Tous droits réservés</div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+<script>
+  // ════════════════════════════════════════════
+  //  ⚙️  CONFIGURATION — À REMPLIR
+  // ════════════════════════════════════════════
+  const EMAILJS_PUBLIC_KEY  = 'VOTRE_PUBLIC_KEY';
+  const EMAILJS_SERVICE_ID  = 'VOTRE_SERVICE_ID';
+  const EMAILJS_TEMPLATE_ID = 'VOTRE_TEMPLATE_COMMANDE'; // template séparé pour les commandes
+  const EMAIL_GERANT        = 'votre@email.com';
+  const IBAN                = 'FR76 XXXX XXXX XXXX XXXX XXXX XXX'; // ← ton IBAN
+  const BIC                 = 'XXXXFRPP';                           // ← ton BIC
+  // ════════════════════════════════════════════
+
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+
+  // Affiche IBAN/BIC dans les blocs
+  document.getElementById('ibanDisplay').textContent = IBAN;
+  document.getElementById('bicDisplay').textContent  = BIC;
+  document.getElementById('confIban').textContent    = IBAN;
+  document.getElementById('confBic').textContent     = BIC;
+
+  let modePaiement = null;
+
+  // ── INIT PANIER ──
+  function initPanier() {
+    const cart = JSON.parse(localStorage.getItem('msCart') || '[]');
+    const container = document.getElementById('cartItems');
+
+    if (cart.length === 0) {
+      document.getElementById('panierEmpty').style.display = 'block';
+      document.getElementById('panierContenu').style.display = 'none';
+      return;
+    }
+
+    container.innerHTML = cart.map((item, idx) => `
+      <div class="cart-item" id="item-${idx}">
+        <div class="cart-item-icon">🛍</div>
+        <div class="cart-item-info">
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-price">${item.price} € / pièce</div>
+        </div>
+        <div class="cart-item-controls">
+          <button class="qty-btn" onclick="changeQty(${idx}, -1)">−</button>
+          <span class="qty-val" id="qty-${idx}">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${idx}, 1)">+</button>
+        </div>
+        <div class="cart-item-total" id="total-${idx}">${item.price * item.qty} €</div>
+        <span class="cart-item-del" onclick="removeItem(${idx})">✕</span>
+      </div>
+    `).join('');
+
+    updateRecap(cart);
+    checkFormReady();
+  }
+
+  // ── TOTAUX ──
+  function updateRecap(cart) {
+    const sousTotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    document.getElementById('recapSousTotal').textContent = sousTotal + ' €';
+    document.getElementById('recapLivraison').textContent = sousTotal >= 150 ? 'Gratuite' : '5 €';
+    const total = sousTotal >= 150 ? sousTotal : sousTotal + 5;
+    document.getElementById('recapTotal').textContent = total + ' €';
+    return total;
+  }
+
+  // ── QUANTITÉ ──
+  function changeQty(idx, delta) {
+    let cart = JSON.parse(localStorage.getItem('msCart') || '[]');
+    cart[idx].qty = Math.max(1, cart[idx].qty + delta);
+    localStorage.setItem('msCart', JSON.stringify(cart));
+    const total = cart.reduce((s, i) => s + i.qty, 0);
+    localStorage.setItem('cartCount', total);
+    document.getElementById('cartCount').textContent = total;
+    document.getElementById('qty-' + idx).textContent = cart[idx].qty;
+    document.getElementById('total-' + idx).textContent = cart[idx].price * cart[idx].qty + ' €';
+    updateRecap(cart);
+  }
+
+  // ── SUPPRIMER ──
+  function removeItem(idx) {
+    let cart = JSON.parse(localStorage.getItem('msCart') || '[]');
+    cart.splice(idx, 1);
+    localStorage.setItem('msCart', JSON.stringify(cart));
+    const total = cart.reduce((s, i) => s + i.qty, 0);
+    localStorage.setItem('cartCount', total);
+    document.getElementById('cartCount').textContent = total;
+    initPanier();
+  }
+
+  // ── SÉLECTION PAIEMENT ──
+  function selectPay(mode) {
+    modePaiement = mode;
+    document.getElementById('payVirement').classList.toggle('selected', mode === 'virement');
+    document.getElementById('payEspeces').classList.toggle('selected', mode === 'especes');
+    document.getElementById('detailVirement').classList.toggle('show', mode === 'virement');
+    document.getElementById('detailEspeces').classList.toggle('show', mode === 'especes');
+    checkFormReady();
+  }
+
+  // ── VÉRIF FORMULAIRE ──
+  function checkFormReady() {
+    const cart = JSON.parse(localStorage.getItem('msCart') || '[]');
+    const filled = ['fPrenom','fNom','fEmail','fAdresse','fCodePostal','fVille'].every(id => document.getElementById(id).value.trim() !== '');
+    document.getElementById('btnCommander').disabled = !(cart.length > 0 && modePaiement && filled);
+  }
+
+  ['fPrenom','fNom','fEmail','fAdresse','fCodePostal','fVille'].forEach(id => {
+    document.getElementById(id).addEventListener('input', checkFormReady);
+  });
+
+  // ── PASSER COMMANDE ──
+  function passerCommande() {
+    const cart  = JSON.parse(localStorage.getItem('msCart') || '[]');
+    const prenom = document.getElementById('fPrenom').value.trim();
+    const nom    = document.getElementById('fNom').value.trim();
+    const email  = document.getElementById('fEmail').value.trim();
+    const adresse = document.getElementById('fAdresse').value.trim();
+    const cp     = document.getElementById('fCodePostal').value.trim();
+    const ville  = document.getElementById('fVille').value.trim();
+
+    const sousTotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    const total     = sousTotal >= 150 ? sousTotal : sousTotal + 5;
+    const ref       = 'MS' + Date.now().toString().slice(-6);
+    const date      = new Date().toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric' });
+    const articlesStr = cart.map(i => `${i.name} x${i.qty} — ${i.price * i.qty}€`).join('\n');
+
+    // Envoi email au gérant
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      to_email:    EMAIL_GERANT,
+      ref:         ref,
+      date:        date,
+      client_nom:  prenom + ' ' + nom,
+      client_email: email,
+      adresse:     adresse + ', ' + cp + ' ' + ville,
+      articles:    articlesStr,
+      total:       total + ' €',
+      paiement:    modePaiement === 'virement' ? 'Virement Instantané' : 'Espèces'
+    }).catch(err => console.warn('EmailJS:', err));
+
+    // Confirmation visuelle
+    document.getElementById('panierContenu').style.display = 'none';
+    document.getElementById('panierEmpty').style.display = 'none';
+    const conf = document.getElementById('confirmation');
+    conf.classList.add('show');
+    document.getElementById('confPrenom').textContent = prenom;
+    document.getElementById('confRef').textContent = 'Référence commande : ' + ref;
+    document.getElementById('confMontant').textContent = total + ' €';
+    document.getElementById('confRefVirement').textContent = ref + ' — ' + prenom + ' ' + nom;
+
+    if (modePaiement === 'virement') {
+      document.getElementById('confVirementBlock').style.display = 'block';
+    }
+
+    // Ajouter points fidélité si connecté
+    const currentUser = localStorage.getItem('msCurrentUser');
+    if (currentUser) {
+      const users = JSON.parse(localStorage.getItem('msUsers') || '{}');
+      if (users[currentUser]) {
+        users[currentUser].points = (users[currentUser].points || 0) + total;
+        users[currentUser].achats = users[currentUser].achats || [];
+        users[currentUser].achats.push({ name: ref + ' (' + cart.length + ' article(s))', price: total, date });
+        localStorage.setItem('msUsers', JSON.stringify(users));
+      }
+    }
+
+    // Vider le panier
+    localStorage.removeItem('msCart');
+    localStorage.setItem('cartCount', '0');
+    document.getElementById('cartCount').textContent = '0';
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  initPanier();
+</script>
+</body>
+</html>
