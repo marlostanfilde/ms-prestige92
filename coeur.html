@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Mes Coups de Cœur — MS Prestige 92</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .coeur-page { min-height: calc(100vh - 97px); background: #fff; padding-bottom: 80px; }
+
+    /* Vide */
+    .coeur-empty { text-align: center; padding: 80px 24px; }
+    .coeur-empty-icon { font-size: 52px; margin-bottom: 16px; }
+    .coeur-empty-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; color: #111; margin-bottom: 8px; }
+    .coeur-empty-sub { font-size: 12px; color: #aaa; letter-spacing: .08em; margin-bottom: 28px; }
+    .btn-shop { display: inline-block; background: #111; color: #fff; padding: 14px 36px; font-size: 11px; letter-spacing: .28em; text-transform: uppercase; font-family: 'Montserrat', sans-serif; }
+
+    /* Grille */
+    .coeur-wrap { padding: 0 16px; }
+    .coeur-sect-label { font-size: 9px; letter-spacing: .35em; color: #aaa; text-transform: uppercase; padding: 28px 0 14px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+    .coeur-count-label { font-size: 11px; color: #aaa; margin-bottom: 20px; letter-spacing: .04em; }
+
+    .coeur-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    .coeur-card { border: 1px solid var(--border); overflow: hidden; position: relative; cursor: pointer; transition: box-shadow .2s; }
+    .coeur-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.07); }
+
+    .coeur-img { background: #f5f4f0; aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+    .coeur-img-mono { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: #ddd; line-height: 1; }
+    .coeur-img-icon { font-size: 36px; }
+
+    .coeur-heart {
+      position: absolute; top: 8px; right: 8px;
+      width: 30px; height: 30px; background: #fff; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; border: 1px solid var(--border);
+      cursor: pointer; z-index: 2;
+    }
+
+    .coeur-body { padding: 10px 12px 12px; }
+    .coeur-brand { font-size: 8px; letter-spacing: .3em; color: var(--gold); text-transform: uppercase; margin-bottom: 3px; }
+    .coeur-name { font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 300; color: #111; margin-bottom: 3px; line-height: 1.2; }
+    .coeur-mat { font-size: 10px; color: #aaa; margin-bottom: 10px; }
+    .coeur-prices { display: flex; align-items: baseline; gap: 6px; margin-bottom: 10px; }
+    .coeur-price { font-size: 16px; color: var(--gold); }
+    .coeur-orig { font-size: 11px; color: #ccc; text-decoration: line-through; }
+    .coeur-btn-cart {
+      width: 100%; padding: 10px; background: #111; color: #fff; border: none;
+      font-family: 'Montserrat', sans-serif; font-size: 10px; letter-spacing: .2em;
+      text-transform: uppercase; cursor: pointer;
+    }
+    .coeur-btn-cart:active { background: var(--gold); }
+
+    /* Bouton tout supprimer */
+    .coeur-clear { text-align: center; margin-top: 32px; }
+    .coeur-clear-btn { background: none; border: 1px solid var(--border); padding: 10px 24px; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; font-family: 'Montserrat', sans-serif; color: #aaa; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+<div class="ann">Livraison offerte à partir de 150€.</div>
+
+<header class="header">
+  <button class="icon-btn" id="menuToggle" aria-label="Menu">
+    <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+  </button>
+  <a href="index.html" class="logo-block">
+    <div class="logo-main">MS Prestige 92</div>
+    <div class="logo-sub">Maison de Luxe</div>
+  </a>
+  <div class="header-right">
+    <a href="panier.html" class="icon-btn cart-btn" aria-label="Panier">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span class="cart-count" id="cartCount">0</span>
+    </a>
+  </div>
+</header>
+
+<div class="menu-overlay" id="menuOverlay"></div>
+<nav class="drawer" id="mobileMenu">
+  <div class="drawer-head">
+    <div class="drawer-logo">MS Prestige 92</div>
+    <button class="icon-btn" id="menuClose">✕</button>
+  </div>
+  <div class="drawer-section-label">Collections</div>
+  <div class="drawer-links">
+    <a href="louis-vuitton.html" class="drawer-link"><span class="dl-dot"></span>Louis Vuitton<span class="dl-arrow">→</span></a>
+    <a href="dior.html" class="drawer-link"><span class="dl-dot"></span>Dior<span class="dl-arrow">→</span></a>
+    <a href="hermes.html" class="drawer-link"><span class="dl-dot"></span>Hermès<span class="dl-arrow">→</span></a>
+    <a href="chaussures.html" class="drawer-link"><span class="dl-dot"></span>Chaussures de Luxe<span class="dl-arrow">→</span></a>
+    <a href="claquettes.html" class="drawer-link"><span class="dl-dot"></span>Claquettes de Luxe<span class="dl-arrow">→</span></a>
+  </div>
+  <div class="drawer-footer">
+    <a href="compte.html" class="drawer-account">👤 Mon compte</a>
+    <a href="coeur.html" class="drawer-account">❤️ Coups de cœur</a>
+    <a href="panier.html" class="drawer-account">🛍 Mon panier</a>
+  </div>
+</nav>
+
+<div class="brand-bar">
+  <span class="brand-eyebrow">Ma sélection</span>
+  <div class="brand-title">Coups de Cœur</div>
+  <div class="brand-sub">Les pièces que vous avez sauvegardées</div>
+</div>
+
+<div class="coeur-page">
+
+  <!-- VIDE -->
+  <div class="coeur-empty" id="coeurEmpty" style="display:none;">
+    <div class="coeur-empty-icon">♡</div>
+    <div class="coeur-empty-title">Aucun coup de cœur</div>
+    <div class="coeur-empty-sub">Cliquez sur ♡ dans la fiche d'un article pour le sauvegarder ici</div>
+    <a href="louis-vuitton.html" class="btn-shop">Explorer les collections</a>
+  </div>
+
+  <!-- CONTENU -->
+  <div id="coeurContenu">
+    <div class="coeur-wrap">
+      <div class="coeur-sect-label">Mes articles sauvegardés</div>
+      <div class="coeur-count-label" id="coeurCount"></div>
+      <div class="coeur-grid" id="coeurGrid"></div>
+      <div class="coeur-clear">
+        <button class="coeur-clear-btn" onclick="clearAll()">Tout supprimer</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div class="f-logo">MS Prestige 92</div>
+  <p class="f-tagline">Une sélection d'exception pour ceux qui ne font aucun compromis sur l'élégance.</p>
+  <div class="f-links">
+    <a href="louis-vuitton.html">Louis Vuitton</a>
+    <a href="dior.html">Dior</a>
+    <a href="hermes.html">Hermès</a>
+    <a href="chaussures.html">Chaussures</a>
+    <a href="claquettes.html">Claquettes</a>
+    <a href="coeur.html">Coups de cœur</a>
+    <a href="#">Contact</a>
+  </div>
+  <div class="f-copy">© 2026 MS Prestige 92 — Tous droits réservés</div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+<script>
+  function renderCoeur() {
+    const wl = JSON.parse(localStorage.getItem('msWishlist') || '[]');
+
+    if (wl.length === 0) {
+      document.getElementById('coeurEmpty').style.display = 'block';
+      document.getElementById('coeurContenu').style.display = 'none';
+      return;
+    }
+
+    document.getElementById('coeurEmpty').style.display = 'none';
+    document.getElementById('coeurContenu').style.display = 'block';
+    document.getElementById('coeurCount').textContent = wl.length + ' article' + (wl.length > 1 ? 's' : '');
+
+    const grid = document.getElementById('coeurGrid');
+    grid.innerHTML = wl.map((item, idx) => `
+      <div class="coeur-card">
+        <div class="coeur-img" onclick="openModalFromCoeur(${idx})">
+          <div class="coeur-img-mono">${item.mono}</div>
+          <div class="coeur-img-icon">${item.icon}</div>
+        </div>
+        <div class="coeur-heart" onclick="removeFromCoeur(${idx})" title="Retirer">❤️</div>
+        <div class="coeur-body">
+          <div class="coeur-brand">${item.brand}</div>
+          <div class="coeur-name">${item.name}</div>
+          <div class="coeur-mat">${item.material}</div>
+          <div class="coeur-prices">
+            <span class="coeur-price">${item.price} €</span>
+            <span class="coeur-orig">${item.origPrice} €</span>
+          </div>
+          <button class="coeur-btn-cart" onclick="addToCartFromCoeur('${item.name}','${item.price}')">
+            Ajouter au panier
+          </button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function removeFromCoeur(idx) {
+    let wl = JSON.parse(localStorage.getItem('msWishlist') || '[]');
+    wl.splice(idx, 1);
+    localStorage.setItem('msWishlist', JSON.stringify(wl));
+    renderCoeur();
+    const toast = document.getElementById('toast');
+    toast.textContent = 'Retiré des coups de cœur';
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2000);
+  }
+
+  function openModalFromCoeur(idx) {
+    const wl = JSON.parse(localStorage.getItem('msWishlist') || '[]');
+    const item = wl[idx];
+    if (!item) return;
+    openModal(item.mono, item.icon, item.name, item.material, item.price, item.origPrice, item.badge || '', item.brand);
+  }
+
+  function addToCartFromCoeur(name, price) {
+    addToCart(name, price);
+  }
+
+  function clearAll() {
+    if (confirm('Supprimer tous les coups de cœur ?')) {
+      localStorage.removeItem('msWishlist');
+      renderCoeur();
+    }
+  }
+
+  renderCoeur();
+</script>
+</body>
+</html>
