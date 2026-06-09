@@ -8,42 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <style>
-    .brand-hero{position:relative;height:48vh;min-height:320px;background:#000;overflow:hidden;display:flex;align-items:flex-end;}
-    .brand-hero-bg{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;overflow:hidden;}
-    .brand-hero-monogram{font-family:'Cormorant Garamond',serif;font-size:14vw;font-weight:300;color:rgba(201,168,76,.04);letter-spacing:.08em;line-height:1;user-select:none;white-space:nowrap;}
-    .brand-hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.85) 100%);z-index:2;}
-    .brand-hero-content{position:relative;z-index:3;padding:0 28px 44px;width:100%;}
-    .brand-eyebrow{font-size:9px;letter-spacing:.45em;color:var(--gold);text-transform:uppercase;margin-bottom:10px;display:block;}
-    .brand-title{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:#fff;letter-spacing:.06em;line-height:1;margin-bottom:6px;}
-    .brand-sub{font-size:10px;letter-spacing:.28em;color:rgba(201,168,76,.55);text-transform:uppercase;}
-    .filter-bar{background:#000;border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:center;gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
-    .filter-bar::-webkit-scrollbar{display:none;}
-    .filter-tab{flex-shrink:0;padding:16px 18px;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#444;cursor:pointer;border-bottom:1.5px solid transparent;transition:all .2s;white-space:nowrap;}
-    .filter-tab.active{color:var(--gold);border-bottom-color:var(--gold);}
-    .prod-section{background:#000;padding:32px 16px 64px;}
-    .prod-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-    .prod-card{background:#0d0d0d;border:1px solid var(--border);overflow:hidden;cursor:pointer;}
-    .prod-img{aspect-ratio:3/4;background:#111;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
-    .prod-img-mono{position:absolute;font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:300;color:rgba(201,168,76,.08);letter-spacing:.1em;user-select:none;}
-    .prod-img-icon{position:relative;z-index:2;font-size:48px;line-height:1;}
-    .prod-badge{position:absolute;top:10px;left:10px;font-size:8px;letter-spacing:.18em;text-transform:uppercase;padding:4px 8px;font-weight:500;z-index:3;}
-    .badge-new{background:var(--gold);color:#000;}
-    .badge-best{border:1px solid var(--gold);color:var(--gold);}
-    .prod-body{padding:14px;border-top:1px solid var(--border);}
-    .prod-name{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:300;color:#e8e8e8;letter-spacing:.04em;margin-bottom:2px;line-height:1.3;}
-    .prod-mat{font-size:10px;color:#444;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px;}
-    .prod-foot{display:flex;align-items:center;justify-content:space-between;}
-    .prod-price{font-size:15px;color:var(--gold);font-weight:400;}
-    .prod-price-orig{font-size:11px;color:#333;text-decoration:line-through;margin-left:5px;}
-    .prod-btn{width:32px;height:32px;border:1px solid var(--border);background:#0a0a0a;color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;-webkit-tap-highlight-color:transparent;flex-shrink:0;transition:all .2s;}
-    .prod-btn:active{background:var(--gold);color:#000;border-color:var(--gold);}
-    .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--gold);color:#000;padding:12px 24px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;z-index:999;transition:transform .3s cubic-bezier(.4,0,.2,1);pointer-events:none;}
-    .toast.show{transform:translateX(-50%) translateY(0);}
-    .sect-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:20px;padding:0 4px;}
-    .sect-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:#fff;letter-spacing:.08em;}
-    .sect-count{font-size:10px;letter-spacing:.18em;color:#333;text-transform:uppercase;}
-  </style>
 </head>
 <body>
 
@@ -85,31 +49,20 @@
   </div>
 </nav>
 
-<section class="brand-hero">
-  <div class="brand-hero-bg"><div class="brand-hero-monogram">Claquettes de Luxe</div></div>
-  <div class="brand-hero-overlay"></div>
-  <div class="brand-hero-content">
-    <span class="brand-eyebrow">Collection Exclusive 2026</span>
-    <div class="brand-title">Claquettes de Luxe</div>
-    <div class="brand-sub">Slides · Mules · Pool · Cuir</div>
-  </div>
-</section>
-
-<div class="filter-bar">
-  <div class="filter-tab active" data-filter="all">Tout</div>
-  <div class="filter-tab" data-filter="slides">Slides</div>
-  <div class="filter-tab" data-filter="mules">Mules</div>
-  <div class="filter-tab" data-filter="pool">Pool Slides</div>
+<div class="brand-bar">
+  <span class="brand-eyebrow">Collection Exclusive 2026</span>
+  <div class="brand-title">Claquettes de Luxe</div>
+  <div class="brand-sub">Slides · Mules · Pool · Cuir</div>
 </div>
 
 <section class="prod-section">
   <div class="sect-head">
     <div class="sect-title">Collection</div>
-    <div class="sect-count" id="prodCount">9 pièces</div>
+    <div class="sect-count">9 pièces</div>
   </div>
-  <div class="prod-grid" id="prodGrid">
+  <div class="prod-grid">
 
-    <div class="prod-card" data-cat="slides">
+    <div class="prod-card">
       <div class="prod-img">
         <div class="prod-img-mono">GG</div>
         <div class="prod-img-icon">🩴</div>
@@ -120,12 +73,12 @@
         <div class="prod-mat">Toile GG Canvas — T.36 à 45</div>
         <div class="prod-foot">
           <div><span class="prod-price">89 €</span><span class="prod-price-orig">420 €</span></div>
-          <button class="prod-btn" onclick="addToCart(this,'Gucci GG Slide','89')">+</button>
+          <button class="prod-btn" onclick="addToCart('Gucci GG Slide','89')">+</button>
         </div>
       </div>
     </div>
 
-    <div class="prod-card" data-cat="slides">
+    <div class="prod-card">
       <div class="prod-img">
         <div class="prod-img-mono">LV</div>
         <div class="prod-img-icon">🩴</div>
@@ -136,12 +89,12 @@
         <div class="prod-mat">Toile Monogram — T.35 à 45</div>
         <div class="prod-foot">
           <div><span class="prod-price">99 €</span><span class="prod-price-orig">480 €</span></div>
-          <button class="prod-btn" onclick="addToCart(this,'LV Waterfront Mule','99')">+</button>
+          <button class="prod-btn" onclick="addToCart('LV Waterfront Mule','99')">+</button>
         </div>
       </div>
     </div>
 
-    <div class="prod-card" data-cat="mules">
+    <div class="prod-card">
       <div class="prod-img">
         <div class="prod-img-mono">H</div>
         <div class="prod-img-icon">🩴</div>
@@ -152,12 +105,12 @@
         <div class="prod-mat">Cuir Swift — T.35 à 42</div>
         <div class="prod-foot">
           <div><span class="prod-price">129 €</span><span class="prod-price-orig">620 €</span></div>
-          <button class="prod-btn" onclick="addToCart(this,'Hermès Oran Sandal','129')">+</button>
+          <button class="prod-btn" onclick="addToCart('Hermès Oran Sandal','129')">+</button>
         </div>
       </div>
     </div>
 
-    <div class="prod-card" data-cat="mules">
+    <div class="prod-card">
       <div class="prod-img">
         <div class="prod-img-mono">CD</div>
         <div class="prod-img-icon">🩴</div>
@@ -168,12 +121,12 @@
         <div class="prod-mat">Broderie Toile — T.35 à 44</div>
         <div class="prod-foot">
           <div><span class="prod-price">109 €</span><span class="prod-price-orig">550 €</span></div>
-          <button class="prod-btn" onclick="addToCart(this,'Dior Dway Slide','109')">+</button>
+          <button class="prod-btn" onclick="addToCart('Dior Dway Slide','109')">+</button>
         </div>
       </div>
     </div>
 
-    <div class="prod-card" data-cat="pool">
+    <div class="prod-card">
       <div class="prod-img">
         <div class="prod-img-mono">BB</div>
         <div class="prod-img-icon">🩴</div>
@@ -184,12 +137,12 @@
         <div class="prod-mat">Résine Premium — T.36 à 46</div>
         <div class="prod-foot">
           <div><span class="prod-price">79 €</span><span class="prod-price-orig">350 €</span></div>
-          <button class="prod-btn" onclick="addToCart(this,'Balenciaga Pool Crocs','79')">+</button>
+          <button class="prod-btn" onclick="addToCart('Balenciaga Pool Crocs','79')">+</button>
         </div>
       </div>
     </div>
 
-    <div class="prod-card" data-cat="pool">
+    <div class="prod-card">
       <div class="prod-img">
         <div class="prod-img-mono">YSL</div>
         <div class="prod-img-icon">🩴</div>
@@ -199,12 +152,12 @@
         <div class="prod-mat">Cuir Verni — T.35 à 42</div>
         <div class="prod-foot">
           <div><span class="prod-price">139 €</span><span class="prod-price-orig">680 €</span></div>
-          <button class="prod-btn" onclick="addToCart(this,'YSL Tribute Sandal','139')">+</button>
+          <button class="prod-btn" onclick="addToCart('YSL Tribute Sandal','139')">+</button>
         </div>
       </div>
     </div>
 
-    <div class="prod-card" data-cat="slides">
+    <div class="prod-card">
       <div class="prod-img">
         <div class="prod-img-mono">GV</div>
         <div class="prod-img-icon">🩴</div>
@@ -214,12 +167,12 @@
         <div class="prod-mat">Cuir Noir — T.36 à 45</div>
         <div class="prod-foot">
           <div><span class="prod-price">94 €</span><span class="prod-price-orig">390 €</span></div>
-          <button class="prod-btn" onclick="addToCart(this,'Givenchy G-Slide','94')">+</button>
+          <button class="prod-btn" onclick="addToCart('Givenchy G-Slide','94')">+</button>
         </div>
       </div>
     </div>
 
-    <div class="prod-card" data-cat="mules">
+    <div class="prod-card">
       <div class="prod-img">
         <div class="prod-img-mono">BV</div>
         <div class="prod-img-icon">🩴</div>
@@ -230,12 +183,12 @@
         <div class="prod-mat">Cuir Intrecciato — T.35 à 44</div>
         <div class="prod-foot">
           <div><span class="prod-price">119 €</span><span class="prod-price-orig">590 €</span></div>
-          <button class="prod-btn" onclick="addToCart(this,'Bottega Stretch Mule','119')">+</button>
+          <button class="prod-btn" onclick="addToCart('Bottega Stretch Mule','119')">+</button>
         </div>
       </div>
     </div>
 
-    <div class="prod-card" data-cat="pool">
+    <div class="prod-card">
       <div class="prod-img">
         <div class="prod-img-mono">PR</div>
         <div class="prod-img-icon">🩴</div>
@@ -246,7 +199,7 @@
         <div class="prod-mat">Caoutchouc Premium — T.36 à 45</div>
         <div class="prod-foot">
           <div><span class="prod-price">89 €</span><span class="prod-price-orig">380 €</span></div>
-          <button class="prod-btn" onclick="addToCart(this,'Prada Logo Slide','89')">+</button>
+          <button class="prod-btn" onclick="addToCart('Prada Logo Slide','89')">+</button>
         </div>
       </div>
     </div>
@@ -273,23 +226,7 @@
 
 <script src="script.js"></script>
 <script>
-  document.querySelectorAll('.filter-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      const f = tab.dataset.filter;
-      const cards = document.querySelectorAll('.prod-card');
-      let count = 0;
-      cards.forEach(c => {
-        const show = f === 'all' || c.dataset.cat === f;
-        c.style.display = show ? '' : 'none';
-        if (show) count++;
-      });
-      document.getElementById('prodCount').textContent = count + ' pièce' + (count > 1 ? 's' : '');
-    });
-  });
-
-  function addToCart(btn, name, price) {
+  function addToCart(name, price) {
     let count = parseInt(localStorage.getItem('cartCount') || '0') + 1;
     localStorage.setItem('cartCount', count);
     document.getElementById('cartCount').textContent = count;
@@ -297,7 +234,6 @@
     toast.classList.add('show');
     setTimeout(() => toast.classList.remove('show'), 2200);
   }
-
   const saved = localStorage.getItem('cartCount');
   if (saved) document.getElementById('cartCount').textContent = saved;
 </script>
