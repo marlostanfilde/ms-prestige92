@@ -208,9 +208,9 @@ if (canvas) {
     drawText(ctx, scale, sweepGrad);
     ctx.globalCompositeOperation = 'source-over';
     // Sous-titre
-    ctx.globalAlpha = .9;
-    ctx.font = `400 ${scale * .065}px 'Cormorant Garamond', Georgia, serif`;
-    ctx.letterSpacing = `${scale * .002}px`;
+    ctx.globalAlpha = 1;
+    ctx.font = `600 ${scale * .072}px 'Cormorant Garamond', Georgia, serif`;
+    ctx.letterSpacing = `${scale * .001}px`;
     ctx.fillStyle = '#C9A84C';
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     ctx.fillText("c'est la meme qualiter c'est juste le prix qui baisse", 0, scale * .12);
@@ -227,7 +227,7 @@ if (canvas) {
   }
 
   function drawText(ctx, scale, fill) {
-    ctx.font = `300 ${scale * .16}px 'Cormorant Garamond', Georgia, serif`;
+    ctx.font = `700 ${scale * .18}px 'Cormorant Garamond', Georgia, serif`;
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     ctx.fillStyle = fill;
     ctx.fillText('AM PRESTIGE', 0, 0);
