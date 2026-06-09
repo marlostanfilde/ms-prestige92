@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Mon Compte — MS Prestige 92</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <style>
+    /* ── PAGE WRAPPER ── */
+    .compte-page { background: #fff; min-height: calc(100vh - 97px); padding: 0 0 64px; }
+
+    /* ── BRAND BAR ── */
+    .brand-bar { background: #fff; border-bottom: 1px solid var(--border); padding: 28px 28px 22px; }
+    .brand-eyebrow { font-size: 9px; letter-spacing: .45em; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; display: block; }
+    .brand-title { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; color: #111; letter-spacing: .06em; line-height: 1; margin-bottom: 4px; }
+    .brand-sub { font-size: 10px; letter-spacing: .28em; color: #bbb; text-transform: uppercase; }
+
+    /* ── AUTH SECTION ── */
+    .auth-wrap { padding: 40px 20px; max-width: 420px; margin: 0 auto; }
+
+    .tabs { display: flex; border-bottom: 1px solid var(--border); margin-bottom: 32px; }
+    .tab-btn {
+      flex: 1; padding: 14px 0; font-size: 11px; letter-spacing: .2em; text-transform: uppercase;
+      background: none; border: none; cursor: pointer; color: #aaa; border-bottom: 2px solid transparent;
+      margin-bottom: -1px; transition: all .2s; font-family: 'Montserrat', sans-serif;
+    }
+    .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+    .auth-form { display: none; flex-direction: column; gap: 16px; }
+    .auth-form.active { display: flex; }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-label { font-size: 9px; letter-spacing: .3em; text-transform: uppercase; color: #aaa; }
+    .form-input {
+      padding: 13px 14px; border: 1px solid var(--border); background: #fafaf7;
+      font-family: 'Montserrat', sans-serif; font-size: 13px; color: #111; outline: none;
+      transition: border-color .2s;
+    }
+    .form-input:focus { border-color: var(--gold); }
+    .form-input::placeholder { color: #ccc; }
+
+    .form-submit {
+      margin-top: 8px; padding: 15px; background: #111; color: #fff; border: none;
+      font-family: 'Montserrat', sans-serif; font-size: 11px; letter-spacing: .28em;
+      text-transform: uppercase; cursor: pointer; transition: background .2s;
+    }
+    .form-submit:active { background: var(--gold); }
+
+    .form-note { font-size: 11px; color: #bbb; text-align: center; line-height: 1.6; }
+    .form-note a { color: var(--gold); cursor: pointer; }
+
+    .form-error { font-size: 11px; color: #c0392b; text-align: center; display: none; padding: 10px; background: #fff5f5; border: 1px solid #ffd5d5; }
+    .form-error.show { display: block; }
+
+    /* ── DASHBOARD ── */
+    .dashboard { display: none; padding: 0 20px; }
+    .dashboard.active { display: block; }
+
+    .dash-welcome {
+      padding: 28px 0 20px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 28px;
+    }
+    .dash-welcome-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; font-weight: 300; color: #111;
+      letter-spacing: .04em; margin-bottom: 4px;
+    }
+    .dash-welcome-sub { font-size: 10px; letter-spacing: .18em; color: #aaa; text-transform: uppercase; }
+
+    /* Points card */
+    .points-card {
+      background: #111; color: #fff; padding: 24px 20px; margin-bottom: 28px;
+      position: relative; overflow: hidden;
+    }
+    .points-card::before {
+      content: '✦'; position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+      font-size: 80px; color: rgba(201,168,76,.08); line-height: 1;
+    }
+    .points-label { font-size: 9px; letter-spacing: .35em; color: var(--gold); text-transform: uppercase; margin-bottom: 8px; }
+    .points-value { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; color: #fff; line-height: 1; margin-bottom: 4px; }
+    .points-sub { font-size: 10px; color: #666; letter-spacing: .1em; }
+    .points-bar-wrap { margin-top: 16px; }
+    .points-bar-label { display: flex; justify-content: space-between; font-size: 9px; color: #555; letter-spacing: .1em; margin-bottom: 6px; }
+    .points-bar-bg { height: 3px; background: #222; border-radius: 2px; }
+    .points-bar-fill { height: 100%; background: var(--gold); border-radius: 2px; transition: width .6s ease; }
+
+    /* Section title */
+    .sect-label { font-size: 9px; letter-spacing: .35em; color: #aaa; text-transform: uppercase; margin-bottom: 16px; }
+
+    /* Offres */
+    .offres-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+    .offre-card {
+      border: 1px solid var(--border); padding: 16px;
+      display: flex; align-items: center; gap: 14px;
+      position: relative; overflow: hidden;
+    }
+    .offre-card.unlocked { border-color: var(--gold); }
+    .offre-card.locked { opacity: .55; }
+    .offre-icon { font-size: 28px; flex-shrink: 0; }
+    .offre-info { flex: 1; }
+    .offre-title { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 300; color: #111; margin-bottom: 2px; }
+    .offre-desc { font-size: 10px; color: #aaa; letter-spacing: .08em; }
+    .offre-badge {
+      font-size: 8px; letter-spacing: .18em; text-transform: uppercase;
+      padding: 4px 8px; flex-shrink: 0;
+    }
+    .offre-badge.active { background: var(--gold); color: #fff; }
+    .offre-badge.locked-badge { border: 1px solid #ddd; color: #ccc; }
+    .offre-pts { font-size: 10px; color: #bbb; flex-shrink: 0; text-align: right; }
+
+    /* Historique */
+    .history-list { display: flex; flex-direction: column; gap: 1px; margin-bottom: 32px; }
+    .history-empty { font-size: 12px; color: #ccc; text-align: center; padding: 24px 0; letter-spacing: .08em; }
+    .history-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0; border-bottom: 1px solid var(--border);
+    }
+    .history-name { font-size: 13px; color: #333; font-family: 'Cormorant Garamond', serif; font-weight: 300; }
+    .history-date { font-size: 10px; color: #bbb; letter-spacing: .08em; margin-top: 2px; }
+    .history-price { font-size: 14px; color: var(--gold); font-weight: 400; }
+
+    /* Déconnexion */
+    .btn-logout {
+      width: 100%; padding: 13px; background: none; border: 1px solid var(--border);
+      font-family: 'Montserrat', sans-serif; font-size: 11px; letter-spacing: .2em;
+      text-transform: uppercase; color: #bbb; cursor: pointer; transition: all .2s;
+    }
+    .btn-logout:active { border-color: #c0392b; color: #c0392b; }
+
+    /* Toast */
+    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--gold); color: #fff; padding: 12px 24px; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; white-space: nowrap; z-index: 999; transition: transform .3s cubic-bezier(.4,0,.2,1); pointer-events: none; }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+
+<div class="ann">Livraison offerte à partir de 150€.</div>
+
+<header class="header">
+  <button class="icon-btn" id="menuToggle" aria-label="Menu">
+    <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+  </button>
+  <a href="index.html" class="logo-block">
+    <div class="logo-main">MS Prestige 92</div>
+    <div class="logo-sub">Maison de Luxe</div>
+  </a>
+  <div class="header-right">
+    <a href="panier.html" class="icon-btn cart-btn" aria-label="Panier">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span class="cart-count" id="cartCount">0</span>
+    </a>
+  </div>
+</header>
+
+<div class="menu-overlay" id="menuOverlay"></div>
+<nav class="drawer" id="mobileMenu">
+  <div class="drawer-head">
+    <div class="drawer-logo">MS Prestige 92</div>
+    <button class="icon-btn" id="menuClose">✕</button>
+  </div>
+  <div class="drawer-section-label">Collections</div>
+  <div class="drawer-links">
+    <a href="louis-vuitton.html" class="drawer-link"><span class="dl-dot"></span>Louis Vuitton<span class="dl-arrow">→</span></a>
+    <a href="dior.html" class="drawer-link"><span class="dl-dot"></span>Dior<span class="dl-arrow">→</span></a>
+    <a href="hermes.html" class="drawer-link"><span class="dl-dot"></span>Hermès<span class="dl-arrow">→</span></a>
+    <a href="chaussures.html" class="drawer-link"><span class="dl-dot"></span>Chaussures de Luxe<span class="dl-arrow">→</span></a>
+    <a href="claquettes.html" class="drawer-link"><span class="dl-dot"></span>Claquettes de Luxe<span class="dl-arrow">→</span></a>
+  </div>
+  <div class="drawer-footer">
+    <a href="compte.html" class="drawer-account">👤 Mon compte</a>
+    <a href="panier.html" class="drawer-account">🛍 Mon panier</a>
+  </div>
+</nav>
+
+<div class="brand-bar">
+  <span class="brand-eyebrow">Espace Personnel</span>
+  <div class="brand-title">Mon Compte</div>
+  <div class="brand-sub">Offres exclusives · Fidélité · Historique</div>
+</div>
+
+<div class="compte-page">
+
+  <!-- AUTH (login / register) -->
+  <div class="auth-wrap" id="authSection">
+    <div class="tabs">
+      <button class="tab-btn active" id="tabConnexion" onclick="switchTab('connexion')">Connexion</button>
+      <button class="tab-btn" id="tabInscription" onclick="switchTab('inscription')">Créer un compte</button>
+    </div>
+
+    <!-- CONNEXION -->
+    <form class="auth-form active" id="formConnexion" onsubmit="handleLogin(event)">
+      <div class="form-error" id="loginError">Email ou mot de passe incorrect.</div>
+      <div class="form-group">
+        <label class="form-label">Adresse e-mail</label>
+        <input class="form-input" type="email" id="loginEmail" placeholder="exemple@email.com" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Mot de passe</label>
+        <input class="form-input" type="password" id="loginPassword" placeholder="••••••••" required />
+      </div>
+      <button class="form-submit" type="submit">Se connecter</button>
+      <p class="form-note">Pas encore de compte ? <a onclick="switchTab('inscription')">Créer un compte →</a></p>
+    </form>
+
+    <!-- INSCRIPTION -->
+    <form class="auth-form" id="formInscription" onsubmit="handleRegister(event)">
+      <div class="form-error" id="registerError">Ce compte existe déjà.</div>
+      <div class="form-group">
+        <label class="form-label">Prénom</label>
+        <input class="form-input" type="text" id="regPrenom" placeholder="Votre prénom" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Nom</label>
+        <input class="form-input" type="text" id="regNom" placeholder="Votre nom" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Adresse e-mail</label>
+        <input class="form-input" type="email" id="regEmail" placeholder="exemple@email.com" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Mot de passe</label>
+        <input class="form-input" type="password" id="regPassword" placeholder="8 caractères minimum" minlength="8" required />
+      </div>
+      <button class="form-submit" type="submit">Créer mon compte</button>
+      <p class="form-note">En créant un compte, vous rejoignez le programme de fidélité MS Prestige 92 et bénéficiez d'offres exclusives à chaque achat.</p>
+    </form>
+  </div>
+
+  <!-- DASHBOARD (après connexion) -->
+  <div class="dashboard" id="dashSection">
+
+    <div class="dash-welcome">
+      <div class="dash-welcome-name" id="dashName">Bonjour,</div>
+      <div class="dash-welcome-sub" id="dashEmail"></div>
+    </div>
+
+    <!-- Points de fidélité -->
+    <div class="sect-label">Programme Fidélité</div>
+    <div class="points-card">
+      <div class="points-label">Mes Points Prestige</div>
+      <div class="points-value" id="dashPoints">0</div>
+      <div class="points-sub">points accumulés</div>
+      <div class="points-bar-wrap">
+        <div class="points-bar-label">
+          <span id="barLabelFrom">0 pts</span>
+          <span id="barLabelTo">Prochain palier : 100 pts</span>
+        </div>
+        <div class="points-bar-bg">
+          <div class="points-bar-fill" id="pointsBarFill" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Offres -->
+    <div class="sect-label">Mes Offres</div>
+    <div class="offres-list">
+
+      <div class="offre-card locked" id="offre1">
+        <div class="offre-icon">🚚</div>
+        <div class="offre-info">
+          <div class="offre-title">Livraison Offerte</div>
+          <div class="offre-desc">Sur toutes vos commandes, sans minimum d'achat</div>
+        </div>
+        <div class="offre-pts">150 pts</div>
+      </div>
+
+      <div class="offre-card locked" id="offre2">
+        <div class="offre-icon">🧢</div>
+        <div class="offre-info">
+          <div class="offre-title">Casquette Offerte</div>
+          <div class="offre-desc">Une casquette MS Prestige 92 offerte à votre commande</div>
+        </div>
+        <div class="offre-pts">300 pts</div>
+      </div>
+
+      <div class="offre-card locked" id="offre3">
+        <div class="offre-icon">💎</div>
+        <div class="offre-info">
+          <div class="offre-title">-10% sur votre commande</div>
+          <div class="offre-desc">Réduction de 10% appliquée automatiquement</div>
+        </div>
+        <div class="offre-pts">600 pts</div>
+      </div>
+
+      <div class="offre-card locked" id="offre4">
+        <div class="offre-icon">👑</div>
+        <div class="offre-info">
+          <div class="offre-title">Ensemble Running Offert</div>
+          <div class="offre-desc">Un ensemble running MS Prestige 92 offert à votre commande</div>
+        </div>
+        <div class="offre-pts">1000 pts</div>
+      </div>
+
+    </div>
+
+    <!-- Comment gagner des points -->
+    <div class="sect-label">Comment gagner des points</div>
+    <div class="offres-list" style="margin-bottom:32px;">
+      <div class="offre-card" style="opacity:.8;">
+        <div class="offre-icon">🛍</div>
+        <div class="offre-info">
+          <div class="offre-title">Chaque achat</div>
+          <div class="offre-desc">1€ dépensé = 1 point Prestige</div>
+        </div>
+      </div>
+      <div class="offre-card" style="opacity:.8;">
+        <div class="offre-icon">⭐</div>
+        <div class="offre-info">
+          <div class="offre-title">Parrainage</div>
+          <div class="offre-desc">+50 points par ami parrainé</div>
+        </div>
+      </div>
+      <div class="offre-card" style="opacity:.8;">
+        <div class="offre-icon">🎂</div>
+        <div class="offre-info">
+          <div class="offre-title">Anniversaire</div>
+          <div class="offre-desc">+25 points offerts chaque année</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Historique achats -->
+    <div class="sect-label">Historique des achats</div>
+    <div class="history-list" id="historyList">
+      <div class="history-empty">Aucun achat pour le moment.</div>
+    </div>
+
+    <button class="btn-logout" onclick="handleLogout()">Se déconnecter</button>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div class="f-logo">MS Prestige 92</div>
+  <p class="f-tagline">Une sélection d'exception pour ceux qui ne font aucun compromis sur l'élégance.</p>
+  <div class="f-links">
+    <a href="louis-vuitton.html">Louis Vuitton</a>
+    <a href="dior.html">Dior</a>
+    <a href="hermes.html">Hermès</a>
+    <a href="chaussures.html">Chaussures</a>
+    <a href="claquettes.html">Claquettes</a>
+    <a href="#">Contact</a>
+    <a href="#">CGV</a>
+  </div>
+  <div class="f-copy">© 2026 MS Prestige 92 — Tous droits réservés</div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+<script>
+  // ════════════════════════════════════════════
+  //  ⚙️  CONFIGURATION EMAILJS — À REMPLIR
+  //  1. Va sur https://www.emailjs.com et crée un compte gratuit
+  //  2. Ajoute un service Gmail (ou autre) → copie le Service ID
+  //  3. Crée un template → copie le Template ID
+  //  4. Va dans Account → copie ta Public Key
+  // ════════════════════════════════════════════
+  const EMAILJS_PUBLIC_KEY  = 'VOTRE_PUBLIC_KEY';   // ex: 'abc123XYZ'
+  const EMAILJS_SERVICE_ID  = 'VOTRE_SERVICE_ID';   // ex: 'service_xxxxxx'
+  const EMAILJS_TEMPLATE_ID = 'VOTRE_TEMPLATE_ID';  // ex: 'template_xxxxxx'
+  const EMAIL_GERANT        = 'votre@email.com';    // ← ton adresse email à toi
+
+  // Initialisation EmailJS
+  emailjs.init(EMAILJS_PUBLIC_KEY);
+
+  // ── ENVOI NOTIFICATION PALIER ──
+  function notifierPalier(user, palierNom, palierPts) {
+    // Vérifie si ce palier a déjà été notifié pour éviter les doublons
+    const dejaNotifie = (user.paliersNotifies || []).includes(palierPts);
+    if (dejaNotifie) return;
+
+    // Marque comme notifié dans localStorage
+    const users = JSON.parse(localStorage.getItem('msUsers') || '{}');
+    users[user.email].paliersNotifies = [...(users[user.email].paliersNotifies || []), palierPts];
+    localStorage.setItem('msUsers', JSON.stringify(users));
+
+    // Envoi de l'email
+    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      to_email:      EMAIL_GERANT,
+      client_prenom: user.prenom,
+      client_nom:    user.nom,
+      client_email:  user.email,
+      palier_nom:    palierNom,
+      palier_pts:    palierPts,
+      points_total:  user.points,
+      date:          new Date().toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric' })
+    }).catch(err => console.warn('EmailJS error:', err));
+  }
+
+  // ── UTILS ──
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  // ── TABS ──
+  function switchTab(tab) {
+    document.getElementById('formConnexion').classList.toggle('active', tab === 'connexion');
+    document.getElementById('formInscription').classList.toggle('active', tab === 'inscription');
+    document.getElementById('tabConnexion').classList.toggle('active', tab === 'connexion');
+    document.getElementById('tabInscription').classList.toggle('active', tab === 'inscription');
+    document.getElementById('loginError').classList.remove('show');
+    document.getElementById('registerError').classList.remove('show');
+  }
+
+  // ── INSCRIPTION ──
+  function handleRegister(e) {
+    e.preventDefault();
+    const prenom = document.getElementById('regPrenom').value.trim();
+    const nom = document.getElementById('regNom').value.trim();
+    const email = document.getElementById('regEmail').value.trim().toLowerCase();
+    const password = document.getElementById('regPassword').value;
+
+    const users = JSON.parse(localStorage.getItem('msUsers') || '{}');
+    if (users[email]) {
+      document.getElementById('registerError').classList.add('show');
+      return;
+    }
+
+    users[email] = { prenom, nom, email, password, points: 0, achats: [], createdAt: new Date().toISOString() };
+    localStorage.setItem('msUsers', JSON.stringify(users));
+    localStorage.setItem('msCurrentUser', email);
+
+    showToast('Bienvenue ' + prenom + ' !');
+    setTimeout(() => showDashboard(email), 600);
+  }
+
+  // ── CONNEXION ──
+  function handleLogin(e) {
+    e.preventDefault();
+    const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+    const password = document.getElementById('loginPassword').value;
+
+    const users = JSON.parse(localStorage.getItem('msUsers') || '{}');
+    const user = users[email];
+
+    if (!user || user.password !== password) {
+      document.getElementById('loginError').classList.add('show');
+      return;
+    }
+
+    localStorage.setItem('msCurrentUser', email);
+    showToast('Content de vous revoir !');
+    setTimeout(() => showDashboard(email), 600);
+  }
+
+  // ── DASHBOARD ──
+  function showDashboard(email) {
+    const users = JSON.parse(localStorage.getItem('msUsers') || '{}');
+    const user = users[email];
+    if (!user) return;
+
+    document.getElementById('authSection').style.display = 'none';
+    document.getElementById('dashSection').classList.add('active');
+
+    document.getElementById('dashName').textContent = 'Bonjour, ' + user.prenom + ' ' + user.nom;
+    document.getElementById('dashEmail').textContent = user.email;
+
+    // Points
+    const pts = user.points || 0;
+    document.getElementById('dashPoints').textContent = pts;
+
+    // Barre de progression vers le prochain palier
+    const paliers = [150, 300, 600, 1000, 99999];
+    const nextPalier = paliers.find(p => p > pts) || 1000;
+    const prevPalier = paliers[paliers.indexOf(nextPalier) - 1] || 0;
+    const pct = Math.min(100, Math.round((pts - prevPalier) / (nextPalier - prevPalier) * 100));
+    document.getElementById('pointsBarFill').style.width = pct + '%';
+    document.getElementById('barLabelFrom').textContent = prevPalier + ' pts';
+    document.getElementById('barLabelTo').textContent = pts >= 1000 ? 'Statut VIP atteint ✦' : 'Prochain palier : ' + nextPalier + ' pts';
+
+    // Offres + notifications paliers
+    const unlock = (id) => {
+      const el = document.getElementById(id);
+      el.classList.remove('locked');
+      el.classList.add('unlocked');
+      const ptsEl = el.querySelector('.offre-pts');
+      if (ptsEl) ptsEl.outerHTML = '<div class="offre-badge active">Disponible</div>';
+    };
+    if (pts >= 150)  { unlock('offre1'); notifierPalier(user, '🚚 Livraison Offerte', 150); }
+    if (pts >= 300)  { unlock('offre2'); notifierPalier(user, '🧢 Casquette Offerte', 300); }
+    if (pts >= 600)  { unlock('offre3'); notifierPalier(user, '💎 -10% sur commande', 600); }
+    if (pts >= 1000) { unlock('offre4'); notifierPalier(user, '👑 Ensemble Running Offert', 1000); }
+
+    // Historique
+    const achats = user.achats || [];
+    const histEl = document.getElementById('historyList');
+    if (achats.length === 0) {
+      histEl.innerHTML = '<div class="history-empty">Aucun achat pour le moment.</div>';
+    } else {
+      histEl.innerHTML = achats.slice().reverse().map(a =>
+        `<div class="history-item">
+          <div>
+            <div class="history-name">${a.name}</div>
+            <div class="history-date">${a.date}</div>
+          </div>
+          <div class="history-price">${a.price} €</div>
+        </div>`
+      ).join('');
+    }
+
+    // Sync panier count
+    const saved = localStorage.getItem('cartCount');
+    if (saved) document.getElementById('cartCount').textContent = saved;
+  }
+
+  // ── DÉCONNEXION ──
+  function handleLogout() {
+    localStorage.removeItem('msCurrentUser');
+    document.getElementById('dashSection').classList.remove('active');
+    document.getElementById('authSection').style.display = '';
+    switchTab('connexion');
+    showToast('Déconnecté');
+  }
+
+  // ── AUTO-LOGIN ──
+  const currentUser = localStorage.getItem('msCurrentUser');
+  if (currentUser) showDashboard(currentUser);
+
+  // Sync panier
+  const savedCart = localStorage.getItem('cartCount');
+  if (savedCart) document.getElementById('cartCount').textContent = savedCart;
+</script>
+</body>
+</html>
