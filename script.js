@@ -44,23 +44,44 @@ function addToCart(name, price) {
 // ── MODAL FICHE PRODUIT ──
 let _modalCurrent = {};
 
-function openModal(mono, icon, name, material, price, origPrice, badge, brand) {
+function openModal(mono, icon, name, material, price, origPrice, badge, brand, imgSrc) {
   const overlay = document.getElementById('modalOverlay');
   const sheet   = document.getElementById('modalSheet');
   if (!overlay || !sheet) return;
 
-  _modalCurrent = { mono, icon, name, material, price, origPrice, badge, brand };
+  _modalCurrent = { mono, icon, name, material, price, origPrice, badge, brand, imgSrc };
 
   const savings = Math.round((1 - parseInt(price) / parseInt(origPrice)) * 100);
 
-  document.getElementById('mMono').textContent    = mono;
-  document.getElementById('mIcon').textContent    = icon;
   document.getElementById('mName').textContent    = name;
   document.getElementById('mMat').textContent     = material;
   document.getElementById('mBrand').textContent   = brand || mono;
   document.getElementById('mPriceNow').textContent = price + ' €';
   document.getElementById('mPriceWas').textContent = origPrice + ' €';
   document.getElementById('mSavings').textContent  = '✦ Économisez ' + savings + '% par rapport au prix boutique';
+
+  // Hero image ou emoji
+  const heroEl = document.getElementById('mHeroImg');
+  const monoEl = document.getElementById('mMono');
+  const iconEl = document.getElementById('mIcon');
+  const heroDiv = sheet.querySelector('.modal-hero');
+  if (heroEl) {
+    if (imgSrc) {
+      heroEl.src = imgSrc;
+      heroEl.style.cssText = 'display:block;width:100%;height:300px;object-fit:cover;object-position:center top;';
+      if (heroDiv) { heroDiv.style.padding = '0'; heroDiv.style.background = 'none'; }
+      if (monoEl) monoEl.style.display = 'none';
+      if (iconEl) iconEl.style.display = 'none';
+    } else {
+      heroEl.style.display = 'none';
+      if (heroDiv) { heroDiv.style.padding = '32px 24px 24px'; heroDiv.style.background = '#f5f4f0'; }
+      if (monoEl) { monoEl.textContent = mono; monoEl.style.display = ''; }
+      if (iconEl) { iconEl.textContent = icon; iconEl.style.display = ''; }
+    }
+  } else {
+    if (monoEl) monoEl.textContent = mono;
+    if (iconEl) iconEl.textContent = icon;
+  }
 
   const badgeEl = document.getElementById('mBadge');
   if (badge) { badgeEl.textContent = badge; badgeEl.style.display = 'inline-block'; }
