@@ -45,6 +45,7 @@
   </div>
   <div class="drawer-footer">
     <a href="compte.html" class="drawer-account">👤 Mon compte</a>
+    <a href="coeur.html" class="drawer-account">❤️ Coups de cœur</a>
     <a href="panier.html" class="drawer-account">🛍 Mon panier</a>
   </div>
 </nav>
@@ -62,49 +63,46 @@
   </div>
   <div class="prod-grid">
 
-    <div class="prod-card">
+    <div class="prod-card" onclick="openModal('H','👜','Birkin 30','Cuir Togo Caramel','499','9500','Iconique','Hermès')">
       <div class="prod-img">
         <div class="prod-img-mono">H</div>
         <div class="prod-img-icon">👜</div>
         <div class="prod-badge badge-best">Iconique</div>
       </div>
-      <div class="prod-body" onclick="openModal('H','👜','Birkin 30','Cuir Togo Caramel','499','9500','Iconique','Hermès')">
+      <div class="prod-body">
         <div class="prod-name">Birkin 30</div>
         <div class="prod-mat">Cuir Togo Caramel</div>
         <div class="prod-foot">
           <div><span class="prod-price">499 €</span><span class="prod-price-orig">9 500 €</span></div>
-          <button class="prod-btn" onclick="event.stopPropagation();addToCart('Birkin 30','499')">+</button>
         </div>
       </div>
     </div>
 
-    <div class="prod-card">
+    <div class="prod-card" onclick="openModal('H','👛','Kelly 28','Cuir Epsom Noir','459','7800','Nouveau','Hermès')">
       <div class="prod-img">
         <div class="prod-img-mono">H</div>
         <div class="prod-img-icon">👛</div>
         <div class="prod-badge badge-new">Nouveau</div>
       </div>
-      <div class="prod-body" onclick="openModal('H','👛','Kelly 28','Cuir Epsom Noir','459','7800','Nouveau','Hermès')">
+      <div class="prod-body">
         <div class="prod-name">Kelly 28</div>
         <div class="prod-mat">Cuir Epsom Noir</div>
         <div class="prod-foot">
           <div><span class="prod-price">459 €</span><span class="prod-price-orig">7 800 €</span></div>
-          <button class="prod-btn" onclick="event.stopPropagation();addToCart('Kelly 28','459')">+</button>
         </div>
       </div>
     </div>
 
-    <div class="prod-card">
+    <div class="prod-card" onclick="openModal('H','👝','Picotin Lock 18','Cuir Clémence','259','2400','','Hermès')">
       <div class="prod-img">
         <div class="prod-img-mono">H</div>
         <div class="prod-img-icon">👝</div>
       </div>
-      <div class="prod-body" onclick="openModal('H','👝','Picotin Lock 18','Cuir Clémence','259','2400','','Hermès')">
+      <div class="prod-body">
         <div class="prod-name">Picotin Lock 18</div>
         <div class="prod-mat">Cuir Clémence</div>
         <div class="prod-foot">
           <div><span class="prod-price">259 €</span><span class="prod-price-orig">2 400 €</span></div>
-          <button class="prod-btn" onclick="event.stopPropagation();addToCart('Picotin Lock 18','259')">+</button>
         </div>
       </div>
     </div>
@@ -153,13 +151,13 @@
     <div class="modal-info-list">
       <div class="modal-info-row"><span>Authenticité</span><span>✦ Certifié MS Prestige 92</span></div>
       <div class="modal-info-row"><span>État</span><span>Très bon état</span></div>
-      <div class="modal-info-row"><span>Livraison</span><span>2 à 5 jours ouvrés</span></div>
+      <div class="modal-info-row"><span>Livraison</span><span>Sous 10 jours</span></div>
       <div class="modal-info-row"><span>Retours</span><span>Sous 14 jours</span></div>
     </div>
   </div>
   <div class="modal-actions">
     <button class="modal-btn-cart" id="mBtnCart">Ajouter au panier</button>
-    <button class="modal-btn-fav" title="Favori">♡</button>
+    <button class="modal-btn-fav" id="mBtnFav" onclick="toggleWishlistModal()">♡</button>
   </div>
 </div>
 
