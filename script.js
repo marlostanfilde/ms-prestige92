@@ -218,11 +218,6 @@ if (canvas) {
     ctx.strokeStyle = '#C9A84C'; ctx.lineWidth = .5;
     const lw = scale * .35;
     ctx.beginPath(); ctx.moveTo(-lw, scale * .19); ctx.lineTo(lw, scale * .19); ctx.stroke();
-    ctx.globalAlpha = .45;
-    ctx.font = `300 ${scale * .04}px Montserrat, sans-serif`;
-    ctx.letterSpacing = `${scale * .018}px`;
-    ctx.fillStyle = '#C9A84C';
-    ctx.fillText('MAISON DE LUXE', 0, scale * .27);
     ctx.restore();
   }
 
