@@ -45,6 +45,7 @@
   </div>
   <div class="drawer-footer">
     <a href="compte.html" class="drawer-account">👤 Mon compte</a>
+    <a href="coeur.html" class="drawer-account">❤️ Coups de cœur</a>
     <a href="panier.html" class="drawer-account">🛍 Mon panier</a>
   </div>
 </nav>
@@ -62,64 +63,60 @@
   </div>
   <div class="prod-grid">
 
-    <div class="prod-card">
+    <div class="prod-card" onclick="openModal('CD','👜','Lady Dior MM','Cuir Cannage','229','3500','Best-seller','Dior')">
       <div class="prod-img">
         <div class="prod-img-mono">CD</div>
         <div class="prod-img-icon">👜</div>
         <div class="prod-badge badge-best">Best-seller</div>
       </div>
-      <div class="prod-body" onclick="openModal('CD','👜','Lady Dior MM','Cuir Cannage','229','3500','Best-seller','Dior')">
+      <div class="prod-body">
         <div class="prod-name">Lady Dior MM</div>
         <div class="prod-mat">Cuir Cannage</div>
         <div class="prod-foot">
           <div><span class="prod-price">229 €</span><span class="prod-price-orig">3 500 €</span></div>
-          <button class="prod-btn" onclick="event.stopPropagation();addToCart('Lady Dior MM','229')">+</button>
         </div>
       </div>
     </div>
 
-    <div class="prod-card">
+    <div class="prod-card" onclick="openModal('CD','👛','Saddle Bag','Cuir de Veau','219','2900','Nouveau','Dior')">
       <div class="prod-img">
         <div class="prod-img-mono">CD</div>
         <div class="prod-img-icon">👛</div>
         <div class="prod-badge badge-new">Nouveau</div>
       </div>
-      <div class="prod-body" onclick="openModal('CD','👛','Saddle Bag','Cuir de Veau','219','2900','Nouveau','Dior')">
+      <div class="prod-body">
         <div class="prod-name">Saddle Bag</div>
         <div class="prod-mat">Cuir de Veau</div>
         <div class="prod-foot">
           <div><span class="prod-price">219 €</span><span class="prod-price-orig">2 900 €</span></div>
-          <button class="prod-btn" onclick="event.stopPropagation();addToCart('Saddle Bag','219')">+</button>
         </div>
       </div>
     </div>
 
-    <div class="prod-card">
+    <div class="prod-card" onclick="openModal('CD','👝','30 Montaigne','Cuir Box Lisse','239','2700','','Dior')">
       <div class="prod-img">
         <div class="prod-img-mono">CD</div>
         <div class="prod-img-icon">👝</div>
       </div>
-      <div class="prod-body" onclick="openModal('CD','👝','30 Montaigne','Cuir Box Lisse','239','2700','','Dior')">
+      <div class="prod-body">
         <div class="prod-name">30 Montaigne</div>
         <div class="prod-mat">Cuir Box Lisse</div>
         <div class="prod-foot">
           <div><span class="prod-price">239 €</span><span class="prod-price-orig">2 700 €</span></div>
-          <button class="prod-btn" onclick="event.stopPropagation();addToCart('30 Montaigne','239')">+</button>
         </div>
       </div>
     </div>
 
-    <div class="prod-card">
+    <div class="prod-card" onclick="openModal('CD','🎒','Dior Backpack','Toile Oblique','199','2100','','Dior')">
       <div class="prod-img">
         <div class="prod-img-mono">CD</div>
         <div class="prod-img-icon">🎒</div>
       </div>
-      <div class="prod-body" onclick="openModal('CD','🎒','Dior Backpack','Toile Oblique','199','2100','','Dior')">
+      <div class="prod-body">
         <div class="prod-name">Dior Backpack</div>
         <div class="prod-mat">Toile Oblique</div>
         <div class="prod-foot">
           <div><span class="prod-price">199 €</span><span class="prod-price-orig">2 100 €</span></div>
-          <button class="prod-btn" onclick="event.stopPropagation();addToCart('Dior Backpack','199')">+</button>
         </div>
       </div>
     </div>
@@ -168,13 +165,13 @@
     <div class="modal-info-list">
       <div class="modal-info-row"><span>Authenticité</span><span>✦ Certifié MS Prestige 92</span></div>
       <div class="modal-info-row"><span>État</span><span>Très bon état</span></div>
-      <div class="modal-info-row"><span>Livraison</span><span>2 à 5 jours ouvrés</span></div>
+      <div class="modal-info-row"><span>Livraison</span><span>Sous 10 jours</span></div>
       <div class="modal-info-row"><span>Retours</span><span>Sous 14 jours</span></div>
     </div>
   </div>
   <div class="modal-actions">
     <button class="modal-btn-cart" id="mBtnCart">Ajouter au panier</button>
-    <button class="modal-btn-fav" title="Favori">♡</button>
+    <button class="modal-btn-fav" id="mBtnFav" onclick="toggleWishlistModal()">♡</button>
   </div>
 </div>
 
