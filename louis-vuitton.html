@@ -45,6 +45,7 @@
   </div>
   <div class="drawer-footer">
     <a href="compte.html" class="drawer-account">👤 Mon compte</a>
+    <a href="coeur.html" class="drawer-account">❤️ Coups de cœur</a>
     <a href="panier.html" class="drawer-account">🛍 Mon panier</a>
   </div>
 </nav>
@@ -62,79 +63,74 @@
   </div>
   <div class="prod-grid">
 
-    <div class="prod-card">
+    <div class="prod-card" onclick="openModal('LV','👜','Neverfull MM','Toile Monogram','199','1490','Best-seller','Louis Vuitton')">
       <div class="prod-img">
         <div class="prod-img-mono">LV</div>
         <div class="prod-img-icon">👜</div>
         <div class="prod-badge badge-best">Best-seller</div>
       </div>
-      <div class="prod-body" onclick="openModal('LV','👜','Neverfull MM','Toile Monogram','199','1490','Best-seller','Louis Vuitton')">
+      <div class="prod-body">
         <div class="prod-name">Neverfull MM</div>
         <div class="prod-mat">Toile Monogram</div>
         <div class="prod-foot">
           <div><span class="prod-price">199 €</span><span class="prod-price-orig">1 490 €</span></div>
-          <button class="prod-btn" onclick="event.stopPropagation();addToCart('Neverfull MM','199')">+</button>
         </div>
       </div>
     </div>
 
-    <div class="prod-card">
+    <div class="prod-card" onclick="openModal('LV','👝','Speedy Bandoulière 25','Toile Damier Ébène','189','1350','Nouveau','Louis Vuitton')">
       <div class="prod-img">
         <div class="prod-img-mono">LV</div>
         <div class="prod-img-icon">👝</div>
         <div class="prod-badge badge-new">Nouveau</div>
       </div>
-      <div class="prod-body" onclick="openModal('LV','👝','Speedy Bandoulière 25','Toile Damier Ébène','189','1350','Nouveau','Louis Vuitton')">
+      <div class="prod-body">
         <div class="prod-name">Speedy Bandoulière 25</div>
         <div class="prod-mat">Toile Damier Ébène</div>
         <div class="prod-foot">
           <div><span class="prod-price">189 €</span><span class="prod-price-orig">1 350 €</span></div>
-          <button class="prod-btn" onclick="event.stopPropagation();addToCart('Speedy Bandoulière 25','189')">+</button>
         </div>
       </div>
     </div>
 
-    <div class="prod-card">
+    <div class="prod-card" onclick="openModal('LV','👛','Alma BB','Cuir Épi','179','1280','','Louis Vuitton')">
       <div class="prod-img">
         <div class="prod-img-mono">LV</div>
         <div class="prod-img-icon">👛</div>
       </div>
-      <div class="prod-body" onclick="openModal('LV','👛','Alma BB','Cuir Épi','179','1280','','Louis Vuitton')">
+      <div class="prod-body">
         <div class="prod-name">Alma BB</div>
         <div class="prod-mat">Cuir Épi</div>
         <div class="prod-foot">
           <div><span class="prod-price">179 €</span><span class="prod-price-orig">1 280 €</span></div>
-          <button class="prod-btn" onclick="event.stopPropagation();addToCart('Alma BB','179')">+</button>
         </div>
       </div>
     </div>
 
-    <div class="prod-card">
+    <div class="prod-card" onclick="openModal('LV','🎒','Palm Springs Mini','Toile Monogram','209','1600','','Louis Vuitton')">
       <div class="prod-img">
         <div class="prod-img-mono">LV</div>
         <div class="prod-img-icon">🎒</div>
       </div>
-      <div class="prod-body" onclick="openModal('LV','🎒','Palm Springs Mini','Toile Monogram','209','1600','','Louis Vuitton')">
+      <div class="prod-body">
         <div class="prod-name">Palm Springs Mini</div>
         <div class="prod-mat">Toile Monogram</div>
         <div class="prod-foot">
           <div><span class="prod-price">209 €</span><span class="prod-price-orig">1 600 €</span></div>
-          <button class="prod-btn" onclick="event.stopPropagation();addToCart('Palm Springs Mini','209')">+</button>
         </div>
       </div>
     </div>
 
-    <div class="prod-card">
+    <div class="prod-card" onclick="openModal('LV','💼','Keepall 45','Toile Monogram','249','1850','','Louis Vuitton')">
       <div class="prod-img">
         <div class="prod-img-mono">LV</div>
         <div class="prod-img-icon">💼</div>
       </div>
-      <div class="prod-body" onclick="openModal('LV','💼','Keepall 45','Toile Monogram','249','1850','','Louis Vuitton')">
+      <div class="prod-body">
         <div class="prod-name">Keepall 45</div>
         <div class="prod-mat">Toile Monogram</div>
         <div class="prod-foot">
           <div><span class="prod-price">249 €</span><span class="prod-price-orig">1 850 €</span></div>
-          <button class="prod-btn" onclick="event.stopPropagation();addToCart('Keepall 45','249')">+</button>
         </div>
       </div>
     </div>
@@ -182,13 +178,13 @@
     <div class="modal-info-list">
       <div class="modal-info-row"><span>Authenticité</span><span>✦ Certifié MS Prestige 92</span></div>
       <div class="modal-info-row"><span>État</span><span>Très bon état</span></div>
-      <div class="modal-info-row"><span>Livraison</span><span>2 à 5 jours ouvrés</span></div>
+      <div class="modal-info-row"><span>Livraison</span><span>Sous 10 jours</span></div>
       <div class="modal-info-row"><span>Retours</span><span>Sous 14 jours</span></div>
     </div>
   </div>
   <div class="modal-actions">
     <button class="modal-btn-cart" id="mBtnCart">Ajouter au panier</button>
-    <button class="modal-btn-fav" title="Favori">♡</button>
+    <button class="modal-btn-fav" id="mBtnFav" onclick="toggleWishlistModal()">♡</button>
   </div>
 </div>
 
