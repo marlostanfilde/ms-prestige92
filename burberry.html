@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Burberry — MS Prestige 92</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="ann">Livraison offerte à partir de 150€.</div>
+
+<header class="header">
+  <button class="icon-btn" id="menuToggle" aria-label="Menu">
+    <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+  </button>
+  <a href="index.html" class="logo-block">
+    <div class="logo-main">MS Prestige 92</div>
+    <div class="logo-sub">Maison de Luxe</div>
+  </a>
+  <div class="header-right">
+    <a href="panier.html" class="icon-btn cart-btn" aria-label="Panier">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span class="cart-count" id="cartCount">0</span>
+    </a>
+  </div>
+</header>
+
+<div class="menu-overlay" id="menuOverlay"></div>
+<nav class="drawer" id="mobileMenu">
+  <div class="drawer-head">
+    <div class="drawer-logo">MS Prestige 92</div>
+    <button class="icon-btn" id="menuClose">✕</button>
+  </div>
+  <div class="drawer-section-label">Collections</div>
+  <div class="drawer-links">
+    <a href="louis-vuitton.html" class="drawer-link"><span class="dl-dot"></span>Louis Vuitton<span class="dl-arrow">→</span></a>
+    <a href="dior.html" class="drawer-link"><span class="dl-dot"></span>Dior<span class="dl-arrow">→</span></a>
+    <a href="hermes.html" class="drawer-link"><span class="dl-dot"></span>Hermès<span class="dl-arrow">→</span></a>
+    <a href="burberry.html" class="drawer-link"><span class="dl-dot"></span>Burberry<span class="dl-arrow">→</span></a>
+    <a href="prada.html" class="drawer-link"><span class="dl-dot"></span>Prada<span class="dl-arrow">→</span></a>
+    <a href="chaussures.html" class="drawer-link"><span class="dl-dot"></span>Chaussures de Luxe<span class="dl-arrow">→</span></a>
+    <a href="claquettes.html" class="drawer-link"><span class="dl-dot"></span>Claquettes de Luxe<span class="dl-arrow">→</span></a>
+    <a href="running.html" class="drawer-link"><span class="dl-dot"></span>Running<span class="dl-arrow">→</span></a>
+  </div>
+  <div class="drawer-footer">
+    <a href="compte.html" class="drawer-account">👤 Mon compte</a>
+    <a href="coeur.html" class="drawer-account">❤️ Coups de cœur</a>
+    <a href="panier.html" class="drawer-account">🛍 Mon panier</a>
+  </div>
+</nav>
+
+<div class="brand-bar">
+  <span class="brand-eyebrow">Maison fondée en 1856</span>
+  <div class="brand-title">Burberry</div>
+  <div class="brand-sub">Ensembles · T-shirts · Polos</div>
+</div>
+
+<section class="prod-section">
+  <div class="sect-head">
+    <div class="sect-title">Collection</div>
+    <div class="sect-count">0 pièces</div>
+  </div>
+  <div class="prod-grid">
+
+    <!-- Les produits seront ajoutés ici -->
+
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="f-logo">MS Prestige 92</div>
+  <p class="f-tagline">Une sélection d'exception pour ceux qui ne font aucun compromis sur l'élégance.</p>
+  <div class="f-links">
+    <a href="louis-vuitton.html">Louis Vuitton</a>
+    <a href="dior.html">Dior</a>
+    <a href="hermes.html">Hermès</a>
+    <a href="burberry.html">Burberry</a>
+    <a href="prada.html">Prada</a>
+    <a href="chaussures.html">Chaussures</a>
+    <a href="claquettes.html">Claquettes</a>
+    <a href="running.html">Running</a>
+  </div>
+  <div class="f-copy">© 2026 MS Prestige 92 — Tous droits réservés</div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<!-- MODAL FICHE PRODUIT -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+<div class="modal-sheet" id="modalSheet">
+  <div class="modal-handle"></div>
+  <button class="modal-close" onclick="closeModal()">✕</button>
+  <div class="modal-hero">
+    <img id="mHeroImg" src="" alt="" style="display:none;width:100%;max-height:420px;object-fit:contain;background:#f5f4f0;" />
+    <div class="modal-mono" id="mMono"></div>
+    <div class="modal-icon-big" id="mIcon"></div>
+    <div class="modal-badge-hero" id="mBadge"></div>
+  </div>
+  <div class="modal-body">
+    <div class="modal-brand-label" id="mBrand"></div>
+    <div class="modal-name" id="mName"></div>
+    <div class="modal-mat" id="mMat"></div>
+    <div class="modal-price-row">
+      <span class="modal-price-now" id="mPriceNow"></span>
+      <span class="modal-price-was" id="mPriceWas"></span>
+    </div>
+    <div class="modal-size-label">Taille</div>
+    <div class="modal-sizes" id="mSizes">
+      <button class="size-btn" onclick="selectSize(this)">S</button>
+      <button class="size-btn" onclick="selectSize(this)">M</button>
+      <button class="size-btn" onclick="selectSize(this)">L</button>
+      <button class="size-btn" onclick="selectSize(this)">XL</button>
+    </div>
+    <div class="modal-savings" id="mSavings"></div>
+    <div class="modal-divider"></div>
+    <div class="modal-info-list">
+      <div class="modal-info-row"><span>Authenticité</span><span>✦ Certifié MS Prestige 92</span></div>
+      <div class="modal-info-row"><span>État</span><span>Très bon état</span></div>
+      <div class="modal-info-row"><span>Livraison</span><span>Sous 10 jours</span></div>
+      <div class="modal-info-row"><span>Retours</span><span>Sous 14 jours</span></div>
+    </div>
+  </div>
+  <div class="modal-actions">
+    <button class="modal-btn-cart" id="mBtnCart">Ajouter au panier</button>
+    <button class="modal-btn-fav" id="mBtnFav" onclick="toggleWishlistModal()">♡</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
