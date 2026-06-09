@@ -68,7 +68,7 @@ function openModal(mono, icon, name, material, price, origPrice, badge, brand, i
   if (heroEl) {
     if (imgSrc) {
       heroEl.src = imgSrc;
-      heroEl.style.cssText = 'display:block;width:100%;height:300px;object-fit:cover;object-position:center top;';
+      heroEl.style.cssText = 'display:block;width:100%;max-height:420px;object-fit:contain;background:#f5f4f0;';
       if (heroDiv) { heroDiv.style.padding = '0'; heroDiv.style.background = 'none'; }
       if (monoEl) monoEl.style.display = 'none';
       if (iconEl) iconEl.style.display = 'none';
@@ -87,8 +87,25 @@ function openModal(mono, icon, name, material, price, origPrice, badge, brand, i
   if (badge) { badgeEl.textContent = badge; badgeEl.style.display = 'inline-block'; }
   else { badgeEl.style.display = 'none'; }
 
+  // Reset tailles
+  const sizeBtns = document.querySelectorAll('#mSizes .size-btn');
+  sizeBtns.forEach(b => b.classList.remove('selected'));
+
   document.getElementById('mBtnCart').onclick = function() {
-    addToCart(name, price);
+    const selectedSize = document.querySelector('#mSizes .size-btn.selected');
+    if (sizeBtns.length > 0 && !selectedSize) {
+      const sizesEl = document.getElementById('mSizes');
+      if (sizesEl) {
+        sizesEl.style.animation = 'none';
+        sizesEl.style.outline = '1px solid #B8962E';
+        setTimeout(() => { sizesEl.style.outline = ''; }, 1200);
+      }
+      const toast = document.getElementById('toast');
+      if (toast) { toast.textContent = 'Veuillez choisir une taille'; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 2000); }
+      return;
+    }
+    const sizeLabel = selectedSize ? ' — ' + selectedSize.textContent : '';
+    addToCart(name + sizeLabel, price);
     closeModal();
   };
 
@@ -113,6 +130,15 @@ function closeModal() {
   overlay.classList.remove('open');
   sheet.classList.remove('open');
   document.body.style.overflow = '';
+}
+
+// ── TAILLES ──
+function selectSize(btn) {
+  const container = btn.closest('#mSizes');
+  if (!container) return;
+  container.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  container.style.outline = '';
 }
 
 // ── WISHLIST (Coups de Cœur) ──
