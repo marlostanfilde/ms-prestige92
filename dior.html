@@ -68,12 +68,12 @@
         <div class="prod-img-icon">👜</div>
         <div class="prod-badge badge-best">Best-seller</div>
       </div>
-      <div class="prod-body">
+      <div class="prod-body" onclick="openModal('CD','👜','Lady Dior MM','Cuir Cannage','229','3500','Best-seller','Dior')">
         <div class="prod-name">Lady Dior MM</div>
         <div class="prod-mat">Cuir Cannage</div>
         <div class="prod-foot">
           <div><span class="prod-price">229 €</span><span class="prod-price-orig">3 500 €</span></div>
-          <button class="prod-btn" onclick="addToCart('Lady Dior MM','229')">+</button>
+          <button class="prod-btn" onclick="event.stopPropagation();addToCart('Lady Dior MM','229')">+</button>
         </div>
       </div>
     </div>
@@ -84,12 +84,12 @@
         <div class="prod-img-icon">👛</div>
         <div class="prod-badge badge-new">Nouveau</div>
       </div>
-      <div class="prod-body">
+      <div class="prod-body" onclick="openModal('CD','👛','Saddle Bag','Cuir de Veau','219','2900','Nouveau','Dior')">
         <div class="prod-name">Saddle Bag</div>
         <div class="prod-mat">Cuir de Veau</div>
         <div class="prod-foot">
           <div><span class="prod-price">219 €</span><span class="prod-price-orig">2 900 €</span></div>
-          <button class="prod-btn" onclick="addToCart('Saddle Bag','219')">+</button>
+          <button class="prod-btn" onclick="event.stopPropagation();addToCart('Saddle Bag','219')">+</button>
         </div>
       </div>
     </div>
@@ -99,12 +99,12 @@
         <div class="prod-img-mono">CD</div>
         <div class="prod-img-icon">👝</div>
       </div>
-      <div class="prod-body">
+      <div class="prod-body" onclick="openModal('CD','👝','30 Montaigne','Cuir Box Lisse','239','2700','','Dior')">
         <div class="prod-name">30 Montaigne</div>
         <div class="prod-mat">Cuir Box Lisse</div>
         <div class="prod-foot">
           <div><span class="prod-price">239 €</span><span class="prod-price-orig">2 700 €</span></div>
-          <button class="prod-btn" onclick="addToCart('30 Montaigne','239')">+</button>
+          <button class="prod-btn" onclick="event.stopPropagation();addToCart('30 Montaigne','239')">+</button>
         </div>
       </div>
     </div>
@@ -114,12 +114,12 @@
         <div class="prod-img-mono">CD</div>
         <div class="prod-img-icon">🎒</div>
       </div>
-      <div class="prod-body">
+      <div class="prod-body" onclick="openModal('CD','🎒','Dior Backpack','Toile Oblique','199','2100','','Dior')">
         <div class="prod-name">Dior Backpack</div>
         <div class="prod-mat">Toile Oblique</div>
         <div class="prod-foot">
           <div><span class="prod-price">199 €</span><span class="prod-price-orig">2 100 €</span></div>
-          <button class="prod-btn" onclick="addToCart('Dior Backpack','199')">+</button>
+          <button class="prod-btn" onclick="event.stopPropagation();addToCart('Dior Backpack','199')">+</button>
         </div>
       </div>
     </div>
@@ -144,18 +144,40 @@
 
 <div class="toast" id="toast">Ajouté au panier</div>
 
+
+<!-- MODAL FICHE PRODUIT -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+<div class="modal-sheet" id="modalSheet">
+  <div class="modal-handle"></div>
+  <button class="modal-close" onclick="closeModal()">✕</button>
+  <div class="modal-hero">
+    <div class="modal-mono" id="mMono"></div>
+    <div class="modal-icon-big" id="mIcon"></div>
+    <div class="modal-badge-hero" id="mBadge"></div>
+  </div>
+  <div class="modal-body">
+    <div class="modal-brand-label" id="mBrand"></div>
+    <div class="modal-name" id="mName"></div>
+    <div class="modal-mat" id="mMat"></div>
+    <div class="modal-price-row">
+      <span class="modal-price-now" id="mPriceNow"></span>
+      <span class="modal-price-was" id="mPriceWas"></span>
+    </div>
+    <div class="modal-savings" id="mSavings"></div>
+    <div class="modal-divider"></div>
+    <div class="modal-info-list">
+      <div class="modal-info-row"><span>Authenticité</span><span>✦ Certifié MS Prestige 92</span></div>
+      <div class="modal-info-row"><span>État</span><span>Très bon état</span></div>
+      <div class="modal-info-row"><span>Livraison</span><span>2 à 5 jours ouvrés</span></div>
+      <div class="modal-info-row"><span>Retours</span><span>Sous 14 jours</span></div>
+    </div>
+  </div>
+  <div class="modal-actions">
+    <button class="modal-btn-cart" id="mBtnCart">Ajouter au panier</button>
+    <button class="modal-btn-fav" title="Favori">♡</button>
+  </div>
+</div>
+
 <script src="script.js"></script>
-<script>
-  function addToCart(name, price) {
-    let count = parseInt(localStorage.getItem('cartCount') || '0') + 1;
-    localStorage.setItem('cartCount', count);
-    document.getElementById('cartCount').textContent = count;
-    const toast = document.getElementById('toast');
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 2200);
-  }
-  const saved = localStorage.getItem('cartCount');
-  if (saved) document.getElementById('cartCount').textContent = saved;
-</script>
 </body>
 </html>
