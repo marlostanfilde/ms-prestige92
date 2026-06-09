@@ -207,16 +207,22 @@ if (canvas) {
     ctx.globalCompositeOperation = 'lighter';
     drawText(ctx, scale, sweepGrad);
     ctx.globalCompositeOperation = 'source-over';
-    ctx.globalAlpha = .55;
-    ctx.font = `300 ${scale * .045}px Montserrat, sans-serif`;
-    ctx.letterSpacing = `${scale * .018}px`;
+    // Sous-titre
+    ctx.globalAlpha = .65;
+    ctx.font = `300 ${scale * .038}px 'Cormorant Garamond', Georgia, serif`;
+    ctx.letterSpacing = `${scale * .004}px`;
     ctx.fillStyle = '#C9A84C';
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    ctx.fillText('MAISON DE LUXE', 0, scale * .22);
+    ctx.fillText("c'est la meme qualiter c'est juste le prix qui baisse", 0, scale * .12);
     ctx.globalAlpha = .3;
     ctx.strokeStyle = '#C9A84C'; ctx.lineWidth = .5;
     const lw = scale * .35;
-    ctx.beginPath(); ctx.moveTo(-lw, scale * .14); ctx.lineTo(lw, scale * .14); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(-lw, scale * .19); ctx.lineTo(lw, scale * .19); ctx.stroke();
+    ctx.globalAlpha = .45;
+    ctx.font = `300 ${scale * .04}px Montserrat, sans-serif`;
+    ctx.letterSpacing = `${scale * .018}px`;
+    ctx.fillStyle = '#C9A84C';
+    ctx.fillText('MAISON DE LUXE', 0, scale * .27);
     ctx.restore();
   }
 
@@ -224,17 +230,17 @@ if (canvas) {
     ctx.font = `300 ${scale * .16}px 'Cormorant Garamond', Georgia, serif`;
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     ctx.fillStyle = fill;
-    ctx.fillText('MS PRESTIGE 92', 0, 0);
+    ctx.fillText('AM PRESTIGE', 0, 0);
   }
 
   function frame() {
     t += 0.012;
     ctx.clearRect(0, 0, W, H);
-    const bg = ctx.createRadialGradient(W*.5, H*.45, 0, W*.5, H*.5, W*.7);
+    const bg = ctx.createRadialGradient(W*.5, H*.45, 0, W*.5, H*.5, W*.45);
     bg.addColorStop(0, '#1a1408'); bg.addColorStop(.5, '#0d0d08'); bg.addColorStop(1, '#000000');
     ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
-    const halo = ctx.createRadialGradient(W*.5, H*.45, 0, W*.5, H*.45, W*.4);
-    halo.addColorStop(0, `rgba(201,168,76,${.06 + Math.sin(t*.5)*.02})`);
+    const halo = ctx.createRadialGradient(W*.5, H*.45, 0, W*.5, H*.45, W*.25);
+    halo.addColorStop(0, `rgba(201,168,76,${.08 + Math.sin(t*.5)*.03})`);
     halo.addColorStop(1, 'rgba(0,0,0,0)');
     ctx.fillStyle = halo; ctx.fillRect(0, 0, W, H);
     particles.forEach(p => {
