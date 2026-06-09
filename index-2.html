@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>MS Prestige 92 — Maison de Luxe c'est la meme qualiter c'est juste le prix qui baisse </title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ANNOUNCEMENT -->
+  <div class="ann">Livraison offerte a partir de 150€. </div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <button class="icon-btn" id="menuToggle" aria-label="Menu">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+    <a href="index.html" class="logo-block">
+      <div class="logo-main">MS Prestige 92</div>
+      <div class="logo-sub">Maison de Luxe</div>
+    </a>
+    <div class="header-right">
+      <a href="panier.html" class="icon-btn cart-btn" aria-label="Panier">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- DRAWER -->
+  <div class="menu-overlay" id="menuOverlay"></div>
+  <nav class="drawer" id="mobileMenu">
+    <div class="drawer-head">
+      <div class="drawer-logo">MS Prestige 92</div>
+      <button class="icon-btn" id="menuClose">✕</button>
+    </div>
+    <div class="drawer-section-label">Collections</div>
+    <div class="drawer-links">
+      <a href="louis-vuitton.html" class="drawer-link">
+        <span class="dl-dot"></span>Louis Vuitton
+        <span class="dl-arrow">→</span>
+      </a>
+      <a href="dior.html" class="drawer-link">
+        <span class="dl-dot"></span>Dior
+        <span class="dl-arrow">→</span>
+      </a>
+      <a href="hermes.html" class="drawer-link">
+        <span class="dl-dot"></span>Hermès
+        <span class="dl-arrow">→</span>
+      </a>
+      <a href="burberry.html" class="drawer-link">
+        <span class="dl-dot"></span>Burberry
+        <span class="dl-arrow">→</span>
+      </a>
+      <a href="prada.html" class="drawer-link">
+        <span class="dl-dot"></span>Prada
+        <span class="dl-arrow">→</span>
+      </a>
+      <a href="chaussures.html" class="drawer-link">
+        <span class="dl-dot"></span>Chaussures de Luxe
+        <span class="dl-arrow">→</span>
+      </a>
+      <a href="claquettes.html" class="drawer-link">
+        <span class="dl-dot"></span>Claquettes de Luxe
+        <span class="dl-arrow">→</span>
+      </a>
+      <a href="running.html" class="drawer-link">
+        <span class="dl-dot"></span>Running
+        <span class="dl-arrow">→</span>
+      </a>
+    </div>
+    <div class="drawer-footer">
+      <a href="compte.html" class="drawer-account">👤 Mon compte</a>
+      <a href="panier.html" class="drawer-account">🛍 Mon panier</a>
+    </div>
+  </nav>
+
+  <!-- HERO FULL avec logo 3D canvas -->
+  <section class="hero">
+    <canvas id="logoCanvas"></canvas>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Collection 2026</p>
+      <a href="#editorial" class="hero-btn">Découvrir</a>
+    </div>
+  </section>
+
+  <!-- GARANTIES -->
+  <section class="trust-section">
+    <div class="trust-grid">
+      <div class="trust-item"><div class="t-icon">✦</div><div class="t-label">pièce d'exception</div></div>
+      <div class="trust-item"><div class="t-icon">◈</div><div class="t-label">Livraison offerte</div></div>
+      <div class="trust-item"><div class="t-icon">↺</div><div class="t-label">Retours 14j</div></div>
+      <div class="trust-item"><div class="t-icon">⊡</div><div class="t-label">Paiement sécurisé</div></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="f-logo">MS Prestige 92</div>
+    <p class="f-tagline">Une sélection d'exception pour ceux qui ne font aucun compromis sur l'élégance.</p>
+    <div class="f-links">
+      <a href="louis-vuitton.html">Louis Vuitton</a>
+      <a href="dior.html">Dior</a>
+      <a href="hermes.html">Hermès</a>
+      <a href="burberry.html">Burberry</a>
+      <a href="prada.html">Prada</a>
+      <a href="chaussures.html">Chaussures</a>
+      <a href="claquettes.html">Claquettes</a>
+      <a href="running.html">Running</a>
+      <a href="#">Contact</a>
+      <a href="#">CGV</a>
+    </div>
+    <div class="f-copy">© 2026 MS Prestige 92 — Tous droits réservés</div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
