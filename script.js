@@ -208,9 +208,9 @@ if (canvas) {
     drawText(ctx, scale, sweepGrad);
     ctx.globalCompositeOperation = 'source-over';
     // Sous-titre
-    ctx.globalAlpha = .65;
-    ctx.font = `300 ${scale * .038}px 'Cormorant Garamond', Georgia, serif`;
-    ctx.letterSpacing = `${scale * .004}px`;
+    ctx.globalAlpha = .9;
+    ctx.font = `400 ${scale * .065}px 'Cormorant Garamond', Georgia, serif`;
+    ctx.letterSpacing = `${scale * .002}px`;
     ctx.fillStyle = '#C9A84C';
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
     ctx.fillText("c'est la meme qualiter c'est juste le prix qui baisse", 0, scale * .12);
@@ -236,10 +236,10 @@ if (canvas) {
   function frame() {
     t += 0.012;
     ctx.clearRect(0, 0, W, H);
-    const bg = ctx.createRadialGradient(W*.5, H*.45, 0, W*.5, H*.5, W*.45);
+    const bg = ctx.createRadialGradient(W*.5, H*.45, 0, W*.5, H*.5, W*.32);
     bg.addColorStop(0, '#1a1408'); bg.addColorStop(.5, '#0d0d08'); bg.addColorStop(1, '#000000');
     ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
-    const halo = ctx.createRadialGradient(W*.5, H*.45, 0, W*.5, H*.45, W*.25);
+    const halo = ctx.createRadialGradient(W*.5, H*.45, 0, W*.5, H*.45, W*.18);
     halo.addColorStop(0, `rgba(201,168,76,${.08 + Math.sin(t*.5)*.03})`);
     halo.addColorStop(1, 'rgba(0,0,0,0)');
     ctx.fillStyle = halo; ctx.fillRect(0, 0, W, H);
