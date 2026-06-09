@@ -320,7 +320,8 @@
   const BIC                 = 'XXXXFRPP';                           // ← ton BIC
   // ════════════════════════════════════════════
 
-  emailjs.init(EMAILJS_PUBLIC_KEY);
+  // Init EmailJS en silence (optionnel — ne bloque pas le panier si le SDK n'est pas chargé)
+  try { emailjs.init(EMAILJS_PUBLIC_KEY); } catch(e) {}
 
   // Affiche IBAN/BIC dans les blocs
   document.getElementById('ibanDisplay').textContent = IBAN;
@@ -433,8 +434,8 @@
     const date      = new Date().toLocaleDateString('fr-FR', { day:'2-digit', month:'long', year:'numeric' });
     const articlesStr = cart.map(i => `${i.name} x${i.qty} — ${i.price * i.qty}€`).join('\n');
 
-    // Envoi email au gérant
-    emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+    // Envoi email au gérant (silencieux si EmailJS non configuré)
+    try { emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
       to_email:    EMAIL_GERANT,
       ref:         ref,
       date:        date,
@@ -444,7 +445,7 @@
       articles:    articlesStr,
       total:       total + ' €',
       paiement:    modePaiement === 'virement' ? 'Virement Instantané' : 'Espèces'
-    }).catch(err => console.warn('EmailJS:', err));
+    }).catch(err => console.warn('EmailJS:', err)); } catch(e) { console.warn('EmailJS non configuré:', e); }
 
     // Confirmation visuelle
     document.getElementById('panierContenu').style.display = 'none';
