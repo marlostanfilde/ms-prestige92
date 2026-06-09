@@ -68,12 +68,12 @@
         <div class="prod-img-icon">👜</div>
         <div class="prod-badge badge-best">Iconique</div>
       </div>
-      <div class="prod-body">
+      <div class="prod-body" onclick="openModal('H','👜','Birkin 30','Cuir Togo Caramel','499','9500','Iconique','Hermès')">
         <div class="prod-name">Birkin 30</div>
         <div class="prod-mat">Cuir Togo Caramel</div>
         <div class="prod-foot">
           <div><span class="prod-price">499 €</span><span class="prod-price-orig">9 500 €</span></div>
-          <button class="prod-btn" onclick="addToCart('Birkin 30','499')">+</button>
+          <button class="prod-btn" onclick="event.stopPropagation();addToCart('Birkin 30','499')">+</button>
         </div>
       </div>
     </div>
@@ -84,12 +84,12 @@
         <div class="prod-img-icon">👛</div>
         <div class="prod-badge badge-new">Nouveau</div>
       </div>
-      <div class="prod-body">
+      <div class="prod-body" onclick="openModal('H','👛','Kelly 28','Cuir Epsom Noir','459','7800','Nouveau','Hermès')">
         <div class="prod-name">Kelly 28</div>
         <div class="prod-mat">Cuir Epsom Noir</div>
         <div class="prod-foot">
           <div><span class="prod-price">459 €</span><span class="prod-price-orig">7 800 €</span></div>
-          <button class="prod-btn" onclick="addToCart('Kelly 28','459')">+</button>
+          <button class="prod-btn" onclick="event.stopPropagation();addToCart('Kelly 28','459')">+</button>
         </div>
       </div>
     </div>
@@ -99,12 +99,12 @@
         <div class="prod-img-mono">H</div>
         <div class="prod-img-icon">👝</div>
       </div>
-      <div class="prod-body">
+      <div class="prod-body" onclick="openModal('H','👝','Picotin Lock 18','Cuir Clémence','259','2400','','Hermès')">
         <div class="prod-name">Picotin Lock 18</div>
         <div class="prod-mat">Cuir Clémence</div>
         <div class="prod-foot">
           <div><span class="prod-price">259 €</span><span class="prod-price-orig">2 400 €</span></div>
-          <button class="prod-btn" onclick="addToCart('Picotin Lock 18','259')">+</button>
+          <button class="prod-btn" onclick="event.stopPropagation();addToCart('Picotin Lock 18','259')">+</button>
         </div>
       </div>
     </div>
@@ -129,18 +129,40 @@
 
 <div class="toast" id="toast">Ajouté au panier</div>
 
+
+<!-- MODAL FICHE PRODUIT -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+<div class="modal-sheet" id="modalSheet">
+  <div class="modal-handle"></div>
+  <button class="modal-close" onclick="closeModal()">✕</button>
+  <div class="modal-hero">
+    <div class="modal-mono" id="mMono"></div>
+    <div class="modal-icon-big" id="mIcon"></div>
+    <div class="modal-badge-hero" id="mBadge"></div>
+  </div>
+  <div class="modal-body">
+    <div class="modal-brand-label" id="mBrand"></div>
+    <div class="modal-name" id="mName"></div>
+    <div class="modal-mat" id="mMat"></div>
+    <div class="modal-price-row">
+      <span class="modal-price-now" id="mPriceNow"></span>
+      <span class="modal-price-was" id="mPriceWas"></span>
+    </div>
+    <div class="modal-savings" id="mSavings"></div>
+    <div class="modal-divider"></div>
+    <div class="modal-info-list">
+      <div class="modal-info-row"><span>Authenticité</span><span>✦ Certifié MS Prestige 92</span></div>
+      <div class="modal-info-row"><span>État</span><span>Très bon état</span></div>
+      <div class="modal-info-row"><span>Livraison</span><span>2 à 5 jours ouvrés</span></div>
+      <div class="modal-info-row"><span>Retours</span><span>Sous 14 jours</span></div>
+    </div>
+  </div>
+  <div class="modal-actions">
+    <button class="modal-btn-cart" id="mBtnCart">Ajouter au panier</button>
+    <button class="modal-btn-fav" title="Favori">♡</button>
+  </div>
+</div>
+
 <script src="script.js"></script>
-<script>
-  function addToCart(name, price) {
-    let count = parseInt(localStorage.getItem('cartCount') || '0') + 1;
-    localStorage.setItem('cartCount', count);
-    document.getElementById('cartCount').textContent = count;
-    const toast = document.getElementById('toast');
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 2200);
-  }
-  const saved = localStorage.getItem('cartCount');
-  if (saved) document.getElementById('cartCount').textContent = saved;
-</script>
 </body>
 </html>
