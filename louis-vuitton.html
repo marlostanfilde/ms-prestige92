@@ -1,39 +1,309 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Louis Vuitton - MS Prestige 92</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Louis Vuitton — MS Prestige 92</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
+<div class="ann">Livraison offerte à partir de 150€.</div>
+
 <header class="header">
-  <!-- même header que l'index -->
+  <button class="icon-btn" id="menuToggle" aria-label="Menu">
+    <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+  </button>
+  <a href="index.html" class="logo-block">
+    <div class="logo-main">MS Prestige 92</div>
+    <div class="logo-sub">Maison de Luxe</div>
+  </a>
+  <div class="header-right">
+    <a href="panier.html" class="icon-btn cart-btn" aria-label="Panier">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      <span class="cart-count" id="cartCount">0</span>
+    </a>
+  </div>
 </header>
 
-<section style="padding:40px 20px;background:#000;color:white;">
-  <h1 style="color:#C9A84C;">Louis Vuitton</h1>
+<div class="menu-overlay" id="menuOverlay"></div>
+<nav class="drawer" id="mobileMenu">
+  <div class="drawer-head">
+    <div class="drawer-logo">MS Prestige 92</div>
+    <button class="icon-btn" id="menuClose">✕</button>
+  </div>
+  <div class="drawer-section-label">Collections</div>
+  <div class="drawer-links">
+    <a href="louis-vuitton.html" class="drawer-link"><span class="dl-dot"></span>Louis Vuitton<span class="dl-arrow">→</span></a>
+    <a href="dior.html" class="drawer-link"><span class="dl-dot"></span>Dior<span class="dl-arrow">→</span></a>
+    <a href="hermes.html" class="drawer-link"><span class="dl-dot"></span>Hermès<span class="dl-arrow">→</span></a>
+    <a href="chaussures.html" class="drawer-link"><span class="dl-dot"></span>Chaussures de Luxe<span class="dl-arrow">→</span></a>
+    <a href="claquettes.html" class="drawer-link"><span class="dl-dot"></span>Claquettes de Luxe<span class="dl-arrow">→</span></a>
+  </div>
+  <div class="drawer-footer">
+    <a href="compte.html" class="drawer-account">👤 Mon compte</a>
+    <a href="coeur.html" class="drawer-account">❤️ Coups de cœur</a>
+    <a href="panier.html" class="drawer-account">🛍 Mon panier</a>
+  </div>
+</nav>
 
-  <div class="product-grid">
+<div class="brand-bar">
+  <span class="brand-eyebrow">Maison fondée en 1854</span>
+  <div class="brand-title">Louis Vuitton</div>
+  <div class="brand-sub">Ensembles · Running · Polo · Tenues</div>
+</div>
 
-    <div class="product-card">
-      <h3>Neverfull MM</h3>
-      <p>199 €</p>
+<section class="prod-section">
+  <div class="sect-head">
+    <div class="sect-title">Collection</div>
+    <div class="sect-count">12 pièces</div>
+  </div>
+  <div class="prod-grid">
+
+    <div class="prod-card" onclick="openModal('LV','👕','Ensemble Marque Déposée','T-shirt + Short Monogram','189','1200','Best-seller','Louis Vuitton','images/lv/lv1.jpg')">
+      <div class="prod-img">
+        <img src="images/lv/lv1.jpg" alt="Ensemble LV Marque Déposée" />
+        <div class="prod-img-mono">LV</div>
+        <div class="prod-img-icon">👕</div>
+        <div class="prod-badge badge-best">Best-seller</div>
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">Ensemble Marque Déposée</div>
+        <div class="prod-mat">T-shirt + Short Monogram</div>
+        <div class="prod-foot">
+          <div><span class="prod-price">189 €</span><span class="prod-price-orig">1 200 €</span></div>
+        </div>
+      </div>
     </div>
 
-    <div class="product-card">
-      <h3>Speedy Bandoulière</h3>
-      <p>189 €</p>
+    <div class="prod-card" onclick="openModal('LV','👕','Ensemble Étoile Monogram','T-shirt + Short Navy','179','1 100','Nouveau','Louis Vuitton','images/lv/lv2.jpg')">
+      <div class="prod-img">
+        <img src="images/lv/lv2.jpg" alt="Ensemble LV Étoile Monogram" />
+        <div class="prod-img-mono">LV</div>
+        <div class="prod-img-icon">👕</div>
+        <div class="prod-badge badge-new">Nouveau</div>
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">Ensemble Étoile Monogram</div>
+        <div class="prod-mat">T-shirt + Short Navy</div>
+        <div class="prod-foot">
+          <div><span class="prod-price">179 €</span><span class="prod-price-orig">1 100 €</span></div>
+        </div>
+      </div>
     </div>
 
-    <div class="product-card">
-      <h3>Alma BB</h3>
-      <p>179 €</p>
+    <div class="prod-card" onclick="openModal('LV','👕','Ensemble Le Monde Est À Vous','T-shirt + Short Bleu','199','1 300','Best-seller','Louis Vuitton','images/lv/lv3.jpg')">
+      <div class="prod-img">
+        <img src="images/lv/lv3.jpg" alt="Ensemble LV Le Monde" />
+        <div class="prod-img-mono">LV</div>
+        <div class="prod-img-icon">👕</div>
+        <div class="prod-badge badge-best">Best-seller</div>
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">Ensemble Le Monde Est À Vous</div>
+        <div class="prod-mat">T-shirt + Short Bleu</div>
+        <div class="prod-foot">
+          <div><span class="prod-price">199 €</span><span class="prod-price-orig">1 300 €</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card" onclick="openModal('LV','👕','Ensemble Running Bleu Ciel','T-shirt + Short Bleu Ciel','159','980','','Louis Vuitton','images/lv/lv4.jpg')">
+      <div class="prod-img">
+        <img src="images/lv/lv4.jpg" alt="Ensemble Running Bleu Ciel" />
+        <div class="prod-img-mono">LV</div>
+        <div class="prod-img-icon">👕</div>
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">Ensemble Running Bleu Ciel</div>
+        <div class="prod-mat">T-shirt + Short Bleu Ciel</div>
+        <div class="prod-foot">
+          <div><span class="prod-price">159 €</span><span class="prod-price-orig">980 €</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card" onclick="openModal('LV','👕','Ensemble LV Embossé Bleu','T-shirt + Short Marine','169','1 050','Nouveau','Louis Vuitton','images/lv/lv5.jpg')">
+      <div class="prod-img">
+        <img src="images/lv/lv5.jpg" alt="Ensemble LV Embossé Bleu" />
+        <div class="prod-img-mono">LV</div>
+        <div class="prod-img-icon">👕</div>
+        <div class="prod-badge badge-new">Nouveau</div>
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">Ensemble LV Embossé Bleu</div>
+        <div class="prod-mat">T-shirt + Short Marine</div>
+        <div class="prod-foot">
+          <div><span class="prod-price">169 €</span><span class="prod-price-orig">1 050 €</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card" onclick="openModal('LV','👕','Ensemble LV Logo Blanc','T-shirt + Short Navy','175','1 080','','Louis Vuitton','images/lv/lv6.jpg')">
+      <div class="prod-img">
+        <img src="images/lv/lv6.jpg" alt="Ensemble LV Logo Blanc" />
+        <div class="prod-img-mono">LV</div>
+        <div class="prod-img-icon">👕</div>
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">Ensemble LV Logo Blanc</div>
+        <div class="prod-mat">T-shirt + Short Navy</div>
+        <div class="prod-foot">
+          <div><span class="prod-price">175 €</span><span class="prod-price-orig">1 080 €</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card" onclick="openModal('LV','👕','Ensemble L.V.M. Jungle','T-shirt Brodé + Short Navy','195','1 250','Best-seller','Louis Vuitton','images/lv/lv7.jpg')">
+      <div class="prod-img">
+        <img src="images/lv/lv7.jpg" alt="Ensemble LV Jungle" />
+        <div class="prod-img-mono">LV</div>
+        <div class="prod-img-icon">👕</div>
+        <div class="prod-badge badge-best">Best-seller</div>
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">Ensemble L.V.M. Jungle</div>
+        <div class="prod-mat">T-shirt Brodé + Short Navy</div>
+        <div class="prod-foot">
+          <div><span class="prod-price">195 €</span><span class="prod-price-orig">1 250 €</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card" onclick="openModal('LV','👕','Ensemble Monogram Gradient','T-shirt + Short Monogram Noir','209','1 400','Nouveau','Louis Vuitton','images/lv/lv8.jpg')">
+      <div class="prod-img">
+        <img src="images/lv/lv8.jpg" alt="Ensemble LV Monogram Gradient" />
+        <div class="prod-img-mono">LV</div>
+        <div class="prod-img-icon">👕</div>
+        <div class="prod-badge badge-new">Nouveau</div>
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">Ensemble Monogram Gradient</div>
+        <div class="prod-mat">T-shirt + Short Monogram Noir</div>
+        <div class="prod-foot">
+          <div><span class="prod-price">209 €</span><span class="prod-price-orig">1 400 €</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card" onclick="openModal('LV','👕','Ensemble Vivienne Orange','T-shirt Vivienne + Short Orange','189','1 200','','Louis Vuitton','images/lv/lv9.jpg')">
+      <div class="prod-img">
+        <img src="images/lv/lv9.jpg" alt="Ensemble LV Vivienne" />
+        <div class="prod-img-mono">LV</div>
+        <div class="prod-img-icon">👕</div>
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">Ensemble Vivienne Orange</div>
+        <div class="prod-mat">T-shirt Vivienne + Short Orange</div>
+        <div class="prod-foot">
+          <div><span class="prod-price">189 €</span><span class="prod-price-orig">1 200 €</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card" onclick="openModal('LV','👔','Polo Monogram Bleu Ciel','Polo + Short Monogram Bleu','219','1 500','Best-seller','Louis Vuitton','images/lv/lv10.jpg')">
+      <div class="prod-img">
+        <img src="images/lv/lv10.jpg" alt="Polo LV Monogram Bleu" />
+        <div class="prod-img-mono">LV</div>
+        <div class="prod-img-icon">👔</div>
+        <div class="prod-badge badge-best">Best-seller</div>
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">Polo Monogram Bleu Ciel</div>
+        <div class="prod-mat">Polo + Short Monogram Bleu</div>
+        <div class="prod-foot">
+          <div><span class="prod-price">219 €</span><span class="prod-price-orig">1 500 €</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card" onclick="openModal('LV','👕','Ensemble Vuitton Signature','T-shirt Signature + Short Noir','185','1 150','','Louis Vuitton','images/lv/lv11.jpg')">
+      <div class="prod-img">
+        <img src="images/lv/lv11.jpg" alt="Ensemble LV Signature" />
+        <div class="prod-img-mono">LV</div>
+        <div class="prod-img-icon">👕</div>
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">Ensemble Vuitton Signature</div>
+        <div class="prod-mat">T-shirt Signature + Short Noir</div>
+        <div class="prod-foot">
+          <div><span class="prod-price">185 €</span><span class="prod-price-orig">1 150 €</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prod-card" onclick="openModal('LV','👕','Ensemble LV Rose','T-shirt + Short Fuchsia','179','1 100','Nouveau','Louis Vuitton','images/lv/lv12.jpg')">
+      <div class="prod-img">
+        <img src="images/lv/lv12.jpg" alt="Ensemble LV Rose" />
+        <div class="prod-img-mono">LV</div>
+        <div class="prod-img-icon">👕</div>
+        <div class="prod-badge badge-new">Nouveau</div>
+      </div>
+      <div class="prod-body">
+        <div class="prod-name">Ensemble LV Rose</div>
+        <div class="prod-mat">T-shirt + Short Fuchsia</div>
+        <div class="prod-foot">
+          <div><span class="prod-price">179 €</span><span class="prod-price-orig">1 100 €</span></div>
+        </div>
+      </div>
     </div>
 
   </div>
 </section>
+
+<footer class="footer">
+  <div class="f-logo">MS Prestige 92</div>
+  <p class="f-tagline">Une sélection d'exception pour ceux qui ne font aucun compromis sur l'élégance.</p>
+  <div class="f-links">
+    <a href="louis-vuitton.html">Louis Vuitton</a>
+    <a href="dior.html">Dior</a>
+    <a href="hermes.html">Hermès</a>
+    <a href="chaussures.html">Chaussures</a>
+    <a href="claquettes.html">Claquettes</a>
+    <a href="#">Contact</a>
+    <a href="#">CGV</a>
+  </div>
+  <div class="f-copy">© 2026 MS Prestige 92 — Tous droits réservés</div>
+</footer>
+
+<div class="toast" id="toast">Ajouté au panier</div>
+
+<!-- MODAL FICHE PRODUIT -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()"></div>
+<div class="modal-sheet" id="modalSheet">
+  <div class="modal-handle"></div>
+  <button class="modal-close" onclick="closeModal()">✕</button>
+  <div class="modal-hero">
+    <img id="mHeroImg" src="" alt="" style="display:none;width:100%;height:260px;object-fit:cover;object-position:center top;" />
+    <div class="modal-mono" id="mMono"></div>
+    <div class="modal-icon-big" id="mIcon"></div>
+    <div class="modal-badge-hero" id="mBadge"></div>
+  </div>
+  <div class="modal-body">
+    <div class="modal-brand-label" id="mBrand"></div>
+    <div class="modal-name" id="mName"></div>
+    <div class="modal-mat" id="mMat"></div>
+    <div class="modal-price-row">
+      <span class="modal-price-now" id="mPriceNow"></span>
+      <span class="modal-price-was" id="mPriceWas"></span>
+    </div>
+    <div class="modal-savings" id="mSavings"></div>
+    <div class="modal-divider"></div>
+    <div class="modal-info-list">
+      <div class="modal-info-row"><span>Authenticité</span><span>✦ Certifié MS Prestige 92</span></div>
+      <div class="modal-info-row"><span>État</span><span>Très bon état</span></div>
+      <div class="modal-info-row"><span>Livraison</span><span>Sous 10 jours</span></div>
+      <div class="modal-info-row"><span>Retours</span><span>Sous 14 jours</span></div>
+    </div>
+  </div>
+  <div class="modal-actions">
+    <button class="modal-btn-cart" id="mBtnCart">Ajouter au panier</button>
+    <button class="modal-btn-fav" id="mBtnFav" onclick="toggleWishlistModal()">♡</button>
+  </div>
+</div>
 
 <script src="script.js"></script>
 </body>
