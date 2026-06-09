@@ -45,6 +45,7 @@
   </div>
   <div class="drawer-footer">
     <a href="compte.html" class="drawer-account">👤 Mon compte</a>
+    <a href="coeur.html" class="drawer-account">❤️ Coups de cœur</a>
     <a href="panier.html" class="drawer-account">🛍 Mon panier</a>
   </div>
 </nav>
@@ -62,159 +63,149 @@
   </div>
   <div class="prod-grid">
 
-    <div class="prod-card">
+    <div class="prod-card" onclick="openModal('LV','👟','LV Trainer Monogram','Cuir & Toile','179','1090','Best-seller','Louis Vuitton')">
       <div class="prod-img">
         <div class="prod-img-mono">LV</div>
         <div class="prod-img-icon">👟</div>
         <div class="prod-badge badge-best">Best-seller</div>
       </div>
-      <div class="prod-body" onclick="openModal('LV','👟','LV Trainer Monogram','Cuir & Toile — T.40 à 46','179','1090','Best-seller','Louis Vuitton')">
+      <div class="prod-body">
         <div class="prod-name">LV Trainer Monogram</div>
         <div class="prod-mat">Cuir & Toile — T.40 à 46</div>
         <div class="prod-foot">
           <div><span class="prod-price">179 €</span><span class="prod-price-orig">1 090 €</span></div>
-          <button class="prod-btn" onclick="event.stopPropagation();addToCart('LV Trainer Monogram','179')">+</button>
         </div>
       </div>
     </div>
 
-    <div class="prod-card">
+    <div class="prod-card" onclick="openModal('CD','👟','Dior B23 High','Toile Oblique','199','1250','Nouveau','Dior')">
       <div class="prod-img">
         <div class="prod-img-mono">CD</div>
         <div class="prod-img-icon">👟</div>
         <div class="prod-badge badge-new">Nouveau</div>
       </div>
-      <div class="prod-body" onclick="openModal('CD','👟','Dior B23 High','Toile Oblique — T.39 à 45','199','1250','Nouveau','Dior')">
+      <div class="prod-body">
         <div class="prod-name">Dior B23 High</div>
         <div class="prod-mat">Toile Oblique — T.39 à 45</div>
         <div class="prod-foot">
           <div><span class="prod-price">199 €</span><span class="prod-price-orig">1 250 €</span></div>
-          <button class="prod-btn" onclick="event.stopPropagation();addToCart('Dior B23 High','199')">+</button>
         </div>
       </div>
     </div>
 
-    <div class="prod-card">
+    <div class="prod-card" onclick="openModal('GG','👟','Gucci Ace GG Supreme','Toile GG Canvas','159','780','','Gucci')">
       <div class="prod-img">
         <div class="prod-img-mono">GG</div>
         <div class="prod-img-icon">👟</div>
       </div>
-      <div class="prod-body" onclick="openModal('GG','👟','Gucci Ace GG Supreme','Toile GG Canvas — T.38 à 46','159','780','','Gucci')">
+      <div class="prod-body">
         <div class="prod-name">Gucci Ace GG Supreme</div>
         <div class="prod-mat">Toile GG Canvas — T.38 à 46</div>
         <div class="prod-foot">
           <div><span class="prod-price">159 €</span><span class="prod-price-orig">780 €</span></div>
-          <button class="prod-btn" onclick="event.stopPropagation();addToCart('Gucci Ace GG Supreme','159')">+</button>
         </div>
       </div>
     </div>
 
-    <div class="prod-card">
+    <div class="prod-card" onclick="openModal('CD','🥾','Dior Explorer Bottine','Cuir Lisse Noir','219','1450','Best-seller','Dior')">
       <div class="prod-img">
         <div class="prod-img-mono">CD</div>
         <div class="prod-img-icon">🥾</div>
         <div class="prod-badge badge-best">Best-seller</div>
       </div>
-      <div class="prod-body" onclick="openModal('CD','🥾','Dior Explorer Bottine','Cuir Lisse Noir — T.37 à 44','219','1450','Best-seller','Dior')">
+      <div class="prod-body">
         <div class="prod-name">Dior Explorer Bottine</div>
         <div class="prod-mat">Cuir Lisse Noir — T.37 à 44</div>
         <div class="prod-foot">
           <div><span class="prod-price">219 €</span><span class="prod-price-orig">1 450 €</span></div>
-          <button class="prod-btn" onclick="event.stopPropagation();addToCart('Dior Explorer Bottine','219')">+</button>
         </div>
       </div>
     </div>
 
-    <div class="prod-card">
+    <div class="prod-card" onclick="openModal('YSL','🥾','YSL Wyatt Zip Boot','Cuir Veau Velours','239','1290','Nouveau','Saint Laurent')">
       <div class="prod-img">
         <div class="prod-img-mono">YSL</div>
         <div class="prod-img-icon">🥾</div>
         <div class="prod-badge badge-new">Nouveau</div>
       </div>
-      <div class="prod-body" onclick="openModal('YSL','🥾','YSL Wyatt Zip Boot','Cuir Veau Velours — T.38 à 44','239','1290','Nouveau','Saint Laurent')">
+      <div class="prod-body">
         <div class="prod-name">YSL Wyatt Zip Boot</div>
         <div class="prod-mat">Cuir Veau Velours — T.38 à 44</div>
         <div class="prod-foot">
           <div><span class="prod-price">239 €</span><span class="prod-price-orig">1 290 €</span></div>
-          <button class="prod-btn" onclick="event.stopPropagation();addToCart('YSL Wyatt Zip Boot','239')">+</button>
         </div>
       </div>
     </div>
 
-    <div class="prod-card">
+    <div class="prod-card" onclick="openModal('GG','👞','Gucci Horsebit Loafer','Cuir Marmont','189','890','Iconique','Gucci')">
       <div class="prod-img">
         <div class="prod-img-mono">GG</div>
         <div class="prod-img-icon">👞</div>
         <div class="prod-badge badge-best">Iconique</div>
       </div>
-      <div class="prod-body" onclick="openModal('GG','👞','Gucci Horsebit Loafer','Cuir Marmont — T.38 à 46','189','890','Iconique','Gucci')">
+      <div class="prod-body">
         <div class="prod-name">Gucci Horsebit Loafer</div>
         <div class="prod-mat">Cuir Marmont — T.38 à 46</div>
         <div class="prod-foot">
           <div><span class="prod-price">189 €</span><span class="prod-price-orig">890 €</span></div>
-          <button class="prod-btn" onclick="event.stopPropagation();addToCart('Gucci Horsebit Loafer','189')">+</button>
         </div>
       </div>
     </div>
 
-    <div class="prod-card">
+    <div class="prod-card" onclick="openModal('LV','👞','LV Major Loafer','Cuir Grainé','169','830','','Louis Vuitton')">
       <div class="prod-img">
         <div class="prod-img-mono">LV</div>
         <div class="prod-img-icon">👞</div>
       </div>
-      <div class="prod-body" onclick="openModal('LV','👞','LV Major Loafer','Cuir Grainé — T.39 à 46','169','830','','Louis Vuitton')">
+      <div class="prod-body">
         <div class="prod-name">LV Major Loafer</div>
         <div class="prod-mat">Cuir Grainé — T.39 à 46</div>
         <div class="prod-foot">
           <div><span class="prod-price">169 €</span><span class="prod-price-orig">830 €</span></div>
-          <button class="prod-btn" onclick="event.stopPropagation();addToCart('LV Major Loafer','169')">+</button>
         </div>
       </div>
     </div>
 
-    <div class="prod-card">
+    <div class="prod-card" onclick="openModal('CL','👠','Louboutin So Kate 120','Cuir Verni Noir','199','760','Iconique','Louboutin')">
       <div class="prod-img">
         <div class="prod-img-mono">CL</div>
         <div class="prod-img-icon">👠</div>
         <div class="prod-badge badge-best">Iconique</div>
       </div>
-      <div class="prod-body" onclick="openModal('CL','👠','Louboutin So Kate 120','Cuir Verni Noir — T.35 à 42','199','760','Iconique','Louboutin')">
+      <div class="prod-body">
         <div class="prod-name">Louboutin So Kate 120</div>
         <div class="prod-mat">Cuir Verni Noir — T.35 à 42</div>
         <div class="prod-foot">
           <div><span class="prod-price">199 €</span><span class="prod-price-orig">760 €</span></div>
-          <button class="prod-btn" onclick="event.stopPropagation();addToCart('Louboutin So Kate 120','199')">+</button>
         </div>
       </div>
     </div>
 
-    <div class="prod-card">
+    <div class="prod-card" onclick="openModal('BV','👞','Bottega Derby Intrecciato','Cuir Tressé','209','980','Nouveau','Bottega Veneta')">
       <div class="prod-img">
         <div class="prod-img-mono">BV</div>
         <div class="prod-img-icon">👞</div>
         <div class="prod-badge badge-new">Nouveau</div>
       </div>
-      <div class="prod-body" onclick="openModal('BV','👞','Bottega Derby Intrecciato','Cuir Tressé — T.39 à 45','209','980','Nouveau','Bottega Veneta')">
+      <div class="prod-body">
         <div class="prod-name">Bottega Derby Intrecciato</div>
         <div class="prod-mat">Cuir Tressé — T.39 à 45</div>
         <div class="prod-foot">
           <div><span class="prod-price">209 €</span><span class="prod-price-orig">980 €</span></div>
-          <button class="prod-btn" onclick="event.stopPropagation();addToCart('Bottega Derby Intrecciato','209')">+</button>
         </div>
       </div>
     </div>
 
-    <div class="prod-card">
+    <div class="prod-card" onclick="openModal('BB','👟','Balenciaga Triple S','Mesh & Cuir','189','995','','Balenciaga')">
       <div class="prod-img">
         <div class="prod-img-mono">BB</div>
         <div class="prod-img-icon">👟</div>
       </div>
-      <div class="prod-body" onclick="openModal('BB','👟','Balenciaga Triple S','Mesh & Cuir — T.38 à 46','189','995','','Balenciaga')">
+      <div class="prod-body">
         <div class="prod-name">Balenciaga Triple S</div>
         <div class="prod-mat">Mesh & Cuir — T.38 à 46</div>
         <div class="prod-foot">
           <div><span class="prod-price">189 €</span><span class="prod-price-orig">995 €</span></div>
-          <button class="prod-btn" onclick="event.stopPropagation();addToCart('Balenciaga Triple S','189')">+</button>
         </div>
       </div>
     </div>
@@ -263,13 +254,13 @@
     <div class="modal-info-list">
       <div class="modal-info-row"><span>Authenticité</span><span>✦ Certifié MS Prestige 92</span></div>
       <div class="modal-info-row"><span>État</span><span>Très bon état</span></div>
-      <div class="modal-info-row"><span>Livraison</span><span>2 à 5 jours ouvrés</span></div>
+      <div class="modal-info-row"><span>Livraison</span><span>Sous 10 jours</span></div>
       <div class="modal-info-row"><span>Retours</span><span>Sous 14 jours</span></div>
     </div>
   </div>
   <div class="modal-actions">
     <button class="modal-btn-cart" id="mBtnCart">Ajouter au panier</button>
-    <button class="modal-btn-fav" title="Favori">♡</button>
+    <button class="modal-btn-fav" id="mBtnFav" onclick="toggleWishlistModal()">♡</button>
   </div>
 </div>
 
