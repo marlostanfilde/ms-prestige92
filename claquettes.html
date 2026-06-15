@@ -59,14 +59,21 @@
   <div class="brand-sub">Slides · Mules · Pool · Cuir</div>
 </div>
 
+<!-- ONGLETS GENRE -->
+<div style="display:flex;justify-content:center;gap:0;margin:0 0 0 0;border-bottom:1px solid #e8e4e4;">
+  <button onclick="filterGenre('tout',this)" id="tab-tout" style="flex:1;max-width:140px;padding:14px 0;background:none;border:none;border-bottom:2px solid #B8962E;font-family:Montserrat,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#B8962E;cursor:pointer;font-weight:500;">Tout</button>
+  <button onclick="filterGenre('femme',this)" id="tab-femme" style="flex:1;max-width:140px;padding:14px 0;background:none;border:none;border-bottom:2px solid transparent;font-family:Montserrat,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#888;cursor:pointer;font-weight:400;">Femme</button>
+  <button onclick="filterGenre('homme',this)" id="tab-homme" style="flex:1;max-width:140px;padding:14px 0;background:none;border:none;border-bottom:2px solid transparent;font-family:Montserrat,sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#888;cursor:pointer;font-weight:400;">Homme</button>
+</div>
+
 <section class="prod-section">
   <div class="sect-head">
     <div class="sect-title">Collection</div>
-    <div class="sect-count">9 pièces</div>
+    <div class="sect-count" id="prodCount">9 pièces</div>
   </div>
-  <div class="prod-grid">
+  <div class="prod-grid" id="prodGrid">
 
-    <div class="prod-card" onclick="openModal('GG','🩴','Gucci GG Slide','Toile GG Canvas','89','420','Best-seller','Gucci')">
+    <div class="prod-card" data-genre="homme" onclick="openModal('GG','🩴','Gucci GG Slide','Toile GG Canvas','89','420','Best-seller','Gucci')">
       <div class="prod-img">
         <div class="prod-img-mono">GG</div>
         <div class="prod-img-icon">🩴</div>
@@ -81,7 +88,7 @@
       </div>
     </div>
 
-    <div class="prod-card" onclick="openModal('LV','🩴','LV Waterfront Mule','Toile Monogram','99','480','Nouveau','Louis Vuitton')">
+    <div class="prod-card" data-genre="homme" onclick="openModal('LV','🩴','LV Waterfront Mule','Toile Monogram','99','480','Nouveau','Louis Vuitton')">
       <div class="prod-img">
         <div class="prod-img-mono">LV</div>
         <div class="prod-img-icon">🩴</div>
@@ -96,7 +103,7 @@
       </div>
     </div>
 
-    <div class="prod-card" onclick="openModal('H','🩴','Hermès Oran Sandal','Cuir Swift','129','620','Iconique','Hermès')">
+    <div class="prod-card" data-genre="femme" onclick="openModal('H','🩴','Hermès Oran Sandal','Cuir Swift','129','620','Iconique','Hermès')">
       <div class="prod-img">
         <div class="prod-img-mono">H</div>
         <div class="prod-img-icon">🩴</div>
@@ -111,7 +118,7 @@
       </div>
     </div>
 
-    <div class="prod-card" onclick="openModal('CD','🩴','Dior Dway Slide','Broderie Toile','109','550','Nouveau','Dior')">
+    <div class="prod-card" data-genre="femme" onclick="openModal('CD','🩴','Dior Dway Slide','Broderie Toile','109','550','Nouveau','Dior')">
       <div class="prod-img">
         <div class="prod-img-mono">CD</div>
         <div class="prod-img-icon">🩴</div>
@@ -126,7 +133,7 @@
       </div>
     </div>
 
-    <div class="prod-card" onclick="openModal('BB','🩴','Balenciaga Pool Crocs','Résine Premium','79','350','Best-seller','Balenciaga')">
+    <div class="prod-card" data-genre="homme" onclick="openModal('BB','🩴','Balenciaga Pool Crocs','Résine Premium','79','350','Best-seller','Balenciaga')">
       <div class="prod-img">
         <div class="prod-img-mono">BB</div>
         <div class="prod-img-icon">🩴</div>
@@ -141,7 +148,7 @@
       </div>
     </div>
 
-    <div class="prod-card" onclick="openModal('YSL','🩴','YSL Tribute Sandal','Cuir Verni','139','680','','Saint Laurent')">
+    <div class="prod-card" data-genre="femme" onclick="openModal('YSL','🩴','YSL Tribute Sandal','Cuir Verni','139','680','','Saint Laurent')">
       <div class="prod-img">
         <div class="prod-img-mono">YSL</div>
         <div class="prod-img-icon">🩴</div>
@@ -155,7 +162,7 @@
       </div>
     </div>
 
-    <div class="prod-card" onclick="openModal('GV','🩴','Givenchy G-Slide','Cuir Noir','94','390','','Givenchy')">
+    <div class="prod-card" data-genre="homme" onclick="openModal('GV','🩴','Givenchy G-Slide','Cuir Noir','94','390','','Givenchy')">
       <div class="prod-img">
         <div class="prod-img-mono">GV</div>
         <div class="prod-img-icon">🩴</div>
@@ -169,7 +176,7 @@
       </div>
     </div>
 
-    <div class="prod-card" onclick="openModal('BV','🩴','Bottega Stretch Mule','Cuir Intrecciato','119','590','Nouveau','Bottega Veneta')">
+    <div class="prod-card" data-genre="femme" onclick="openModal('BV','🩴','Bottega Stretch Mule','Cuir Intrecciato','119','590','Nouveau','Bottega Veneta')">
       <div class="prod-img">
         <div class="prod-img-mono">BV</div>
         <div class="prod-img-icon">🩴</div>
@@ -184,7 +191,7 @@
       </div>
     </div>
 
-    <div class="prod-card" onclick="openModal('PR','🩴','Prada Logo Slide','Caoutchouc Premium','89','380','Iconique','Prada')">
+    <div class="prod-card" data-genre="homme" onclick="openModal('PR','🩴','Prada Logo Slide','Caoutchouc Premium','89','380','Iconique','Prada')">
       <div class="prod-img">
         <div class="prod-img-mono">PR</div>
         <div class="prod-img-icon">🩴</div>
@@ -264,5 +271,31 @@
 </div>
 
 <script src="script.js"></script>
+<script>
+function filterGenre(genre, btn) {
+  // Style des onglets
+  document.querySelectorAll('[id^="tab-"]').forEach(t => {
+    t.style.borderBottomColor = 'transparent';
+    t.style.color = '#888';
+    t.style.fontWeight = '400';
+  });
+  btn.style.borderBottomColor = '#B8962E';
+  btn.style.color = '#B8962E';
+  btn.style.fontWeight = '500';
+
+  // Filtre les cartes
+  const cards = document.querySelectorAll('#prodGrid .prod-card');
+  let visible = 0;
+  cards.forEach(card => {
+    if (genre === 'tout' || card.dataset.genre === genre) {
+      card.style.display = '';
+      visible++;
+    } else {
+      card.style.display = 'none';
+    }
+  });
+  document.getElementById('prodCount').textContent = visible + ' pièce' + (visible > 1 ? 's' : '');
+}
+</script>
 </body>
 </html>
