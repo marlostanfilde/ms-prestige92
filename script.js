@@ -92,11 +92,27 @@ function openModal(mono, icon, name, material, price, origPrice, badge, brand, i
   sizeBtns.forEach(b => b.classList.remove('selected'));
 
   document.getElementById('mBtnCart').onclick = function() {
+    // Champ texte libre (claquettes / chaussures)
+    const sizeInput = document.getElementById('mSizeInput');
+    if (sizeInput) {
+      const val = sizeInput.value.trim();
+      if (!val) {
+        sizeInput.style.borderColor = '#B8962E';
+        setTimeout(() => { sizeInput.style.borderColor = '#e8e4e4'; }, 1200);
+        const toast = document.getElementById('toast');
+        if (toast) { toast.textContent = 'Veuillez indiquer votre pointure'; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 2000); }
+        return;
+      }
+      addToCart(name + ' — ' + val, price);
+      sizeInput.value = '';
+      closeModal();
+      return;
+    }
+    // Boutons de taille (autres pages)
     const selectedSize = document.querySelector('#mSizes .size-btn.selected');
     if (sizeBtns.length > 0 && !selectedSize) {
       const sizesEl = document.getElementById('mSizes');
       if (sizesEl) {
-        sizesEl.style.animation = 'none';
         sizesEl.style.outline = '1px solid #B8962E';
         setTimeout(() => { sizesEl.style.outline = ''; }, 1200);
       }
