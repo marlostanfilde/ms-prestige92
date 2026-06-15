@@ -44,10 +44,25 @@ function addToCart(name, price) {
 // ── MODAL FICHE PRODUIT ──
 let _modalCurrent = {};
 
-function openModal(mono, icon, name, material, price, origPrice, badge, brand, imgSrc) {
+function openModal(monoOrEl, icon, name, material, price, origPrice, badge, brand, imgSrc) {
   const overlay = document.getElementById('modalOverlay');
   const sheet   = document.getElementById('modalSheet');
   if (!overlay || !sheet) return;
+
+  // Support openModal(this) with data-* attributes
+  let mono = monoOrEl;
+  if (monoOrEl && typeof monoOrEl === 'object' && monoOrEl.dataset) {
+    const el = monoOrEl;
+    name      = el.dataset.name  || '';
+    brand     = el.dataset.brand || '';
+    material  = el.dataset.mat   || '';
+    price     = el.dataset.price || '0';
+    origPrice = el.dataset.was   || '0';
+    badge     = el.dataset.badge || '';
+    imgSrc    = el.dataset.img   || '';
+    mono      = el.dataset.mono  || (brand ? brand.substring(0,2).toUpperCase() : '');
+    icon      = el.dataset.icon  || '';
+  }
 
   _modalCurrent = { mono, icon, name, material, price, origPrice, badge, brand, imgSrc };
 
@@ -66,14 +81,26 @@ function openModal(mono, icon, name, material, price, origPrice, badge, brand, i
   const iconEl = document.getElementById('mIcon');
   const heroDiv = sheet.querySelector('.modal-hero');
   if (heroEl) {
+    heroEl.onerror = null;
     if (imgSrc) {
-      heroEl.src = imgSrc;
-      heroEl.style.cssText = 'display:block;width:100%;max-height:420px;object-fit:contain;background:#f5f4f0;';
+      heroEl.style.display = 'block';
+      heroEl.style.width = '100%';
+      heroEl.style.maxHeight = '420px';
+      heroEl.style.objectFit = 'contain';
+      heroEl.style.background = '#f5f4f0';
       if (heroDiv) { heroDiv.style.padding = '0'; heroDiv.style.background = 'none'; }
       if (monoEl) monoEl.style.display = 'none';
       if (iconEl) iconEl.style.display = 'none';
+      heroEl.onerror = function() {
+        this.style.display = 'none';
+        if (heroDiv) { heroDiv.style.padding = '32px 24px 24px'; heroDiv.style.background = '#f5f4f0'; }
+        if (monoEl) { monoEl.textContent = mono; monoEl.style.display = ''; }
+        if (iconEl) { iconEl.textContent = '🩴'; iconEl.style.display = ''; }
+      };
+      heroEl.src = imgSrc;
     } else {
       heroEl.style.display = 'none';
+      heroEl.src = '';
       if (heroDiv) { heroDiv.style.padding = '32px 24px 24px'; heroDiv.style.background = '#f5f4f0'; }
       if (monoEl) { monoEl.textContent = mono; monoEl.style.display = ''; }
       if (iconEl) { iconEl.textContent = icon; iconEl.style.display = ''; }
